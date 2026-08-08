@@ -23,11 +23,11 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "app"))
+sys.path.insert(0, ROOT)
 
-from ingestion import parse_bytes            # noqa: E402
-from audit_engine import AuditEngine         # noqa: E402
-from pdf_report import build_pdf             # noqa: E402
+from core.ingestion import parse_bytes       # noqa: E402
+from core.audit_engine import AuditEngine    # noqa: E402
+from core.pdf_report import build_pdf        # noqa: E402
 
 
 def run(script):

@@ -1,0 +1,26 @@
+# Keep the Vercel deployment to what the site actually needs at runtime:
+#   api/      serverless functions
+#   core/     the audit engine they import
+#   data/     the Annex A baseline
+#   samples/  the demonstration profiles
+#   public/   the frontend
+#
+# Everything below is local tooling or documentation. Excluding app/ also stops
+# Vercel's entrypoint detection from ever looking at the Streamlit application.
+app/
+tests/
+tools/
+docs/
+collector/
+requirements-streamlit.txt
+requirements-dev.txt
+run.sh
+README.md
+LICENSE
+.git/
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store

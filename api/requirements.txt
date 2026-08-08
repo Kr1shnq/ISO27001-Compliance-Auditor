@@ -1,0 +1,10 @@
+# Dependencies for the Vercel Python serverless functions ONLY.
+#
+# The audit engine (core/ingestion.py, core/audit_engine.py) is pure standard
+# library — this single package is needed solely by core/pdf_report.py for the
+# PDF export endpoint. Keeping the function bundle this small keeps cold starts
+# fast and stays far inside Vercel's size limit.
+#
+# The Streamlit app's heavier dependencies (streamlit, pandas, plotly) live in
+# the root requirements.txt and are deliberately NOT installed here.
+fpdf2>=2.7,<3

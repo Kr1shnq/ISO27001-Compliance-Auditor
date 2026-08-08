@@ -1,4 +1,8 @@
-streamlit>=1.49
-pandas>=2.0
-plotly>=5.18
-fpdf2>=2.7
+# Runtime dependency of core/ — the audit engine itself is pure standard library
+# and this is needed only by core/pdf_report.py.
+#
+# Kept deliberately minimal because Vercel's Python runtime may install the
+# root requirements.txt into the serverless function bundle. The Streamlit UI's
+# much heavier dependencies live in requirements-streamlit.txt so they can never
+# end up in a function.
+fpdf2>=2.7,<3

@@ -1,0 +1,4 @@
+# Everything needed to develop the project and rebuild every artefact.
+#   pip install -r requirements-dev.txt
+-r requirements-streamlit.txt
+reportlab>=4.0        # docs/build_guide.py — the overview and user guide PDF

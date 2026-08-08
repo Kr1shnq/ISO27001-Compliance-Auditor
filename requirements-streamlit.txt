@@ -1,0 +1,6 @@
+# Dependencies for the local Streamlit interface (app/dashboard.py).
+#   pip install -r requirements-streamlit.txt
+-r requirements.txt
+streamlit>=1.49
+pandas>=2.0
+plotly>=5.18
