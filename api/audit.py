@@ -35,7 +35,20 @@ Response 200:
 Errors return {"error": "<human readable message>"} with a 4xx/5xx status.
 """
 
-from _common import JSONHandler, run_audit
+import os
+import sys
+
+# Vercel does not reliably place the api/ directory on sys.path, so a bare
+# `from _common import ...` can raise ModuleNotFoundError while the module is
+# being imported — before any handler exists to catch it, which surfaces as an
+# opaque platform 500. Bootstrap both api/ and the repo root explicitly.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_ROOT = os.path.dirname(_HERE)
+for _p in (_HERE, _ROOT):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+from _common import JSONHandler, run_audit                       # noqa: E402
 
 
 class handler(JSONHandler):                                   # noqa: N801

@@ -64,6 +64,20 @@ Notes on how it fits the platform:
   the Streamlit application entirely.
 - Python version is pinned in `.python-version`.
 
+### Troubleshooting a deployment
+
+Visit `/api/health` on the deployed URL. It imports nothing at module level and
+probes each dependency separately, so it answers even when the other endpoints
+cannot start, and names the specific failure:
+
+```json
+{ "healthy": true,
+  "checks": { "files_present": {...}, "import_common": {...},
+              "load_engine": {...}, "run_audit": {...}, "import_fpdf2": {...} } }
+```
+
+If the frontend shows *"Could not reach the audit service"*, that endpoint will say why.
+
 **Streamlit cannot be hosted on Vercel.** It needs a persistent stateful server process
 holding session state in memory; Vercel runs functions per request. That is why the web
 interface exists as a separate frontend over a stateless API rather than as a port of the
@@ -95,6 +109,7 @@ Streamlit app.
 | `/api/baseline` | GET | Control catalogue and sample list. Cached at the edge. |
 | `/api/audit` | POST | Telemetry in, full assessment out. |
 | `/api/report` | POST | Telemetry in, PDF audit report out. |
+| `/api/health` | GET | Deployment self-check — see below. |
 
 `/api/audit` accepts a raw uploaded file (`content` + `filename`), an already-parsed
 `telemetry` object, or a bundled `sample`; plus optional `attestations`, `scopedOut` and

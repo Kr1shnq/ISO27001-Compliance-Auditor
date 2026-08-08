@@ -80,6 +80,50 @@ def request(path, payload=None, method=None, raw=False):
 
 
 # ---------------------------------------------------------------------------
+print("\n=== 0. Handlers import without api/ on sys.path ===")
+# Vercel does not guarantee the api/ directory is importable, so a bare
+# `from _common import ...` fails at module import — before any handler exists
+# to catch it, producing an opaque platform 500. Reproduce that environment
+# exactly: import each handler in a subprocess whose sys.path contains neither
+# api/ nor the repo root, relying only on the bootstrap inside each file.
+import importlib.util                                     # noqa: E402
+import subprocess                                         # noqa: E402
+
+for mod in ("audit", "report", "baseline", "health"):
+    src = (
+        "import sys, os, importlib.util\n"
+        # Strip everything that would make the import succeed by accident.
+        f"sys.path = [p for p in sys.path if os.path.abspath(p) not in "
+        f"({os.path.join(ROOT, 'api')!r}, {ROOT!r})]\n"
+        "os.chdir('/')\n"                                  # cwd must not matter
+        f"spec = importlib.util.spec_from_file_location('h_{mod}', "
+        f"{os.path.join(ROOT, 'api', mod + '.py')!r})\n"
+        "m = importlib.util.module_from_spec(spec)\n"
+        "spec.loader.exec_module(m)\n"
+        "assert hasattr(m, 'handler'), 'no handler class'\n"
+        "print('OK')\n"
+    )
+    proc = subprocess.run([sys.executable, "-c", src], capture_output=True, text=True)
+    detail = (proc.stderr.strip().splitlines() or [""])[-1][:90]
+    check(f"api/{mod}.py imports in a bare interpreter",
+          proc.returncode == 0 and "OK" in proc.stdout, detail)
+
+
+print("\n=== 0b. GET /api/health ===")
+status, h = request("/api/health")
+check("Health endpoint reports healthy", status == 200 and h.get("healthy") is True,
+      f"{status} " + json.dumps({k: v.get("ok") for k, v in h.get("checks", {}).items()}))
+if h.get("checks"):
+    check("All required files present in the bundle",
+          all(h["checks"]["files_present"]["value"].values()),
+          str({k: v for k, v in h["checks"]["files_present"]["value"].items() if not v}))
+    check("Engine loads 93 controls",
+          h["checks"]["load_engine"]["value"]["controls"] == 93)
+    check("fpdf2 importable", h["checks"]["import_fpdf2"]["ok"],
+          str(h["checks"]["import_fpdf2"].get("value") or
+              h["checks"]["import_fpdf2"].get("error")))
+
+
 print("\n=== 1. GET /api/baseline ===")
 status, d = request("/api/baseline")
 check("200 OK", status == 200, str(status))

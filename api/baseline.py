@@ -9,7 +9,17 @@ sample picker before any telemetry has been submitted. The response is static
 for a given deployment, so it is cached hard at the edge.
 """
 
-from _common import JSONHandler, get_engine, list_samples
+import os
+import sys
+
+# See api/audit.py — Vercel does not guarantee api/ is on sys.path.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_ROOT = os.path.dirname(_HERE)
+for _p in (_HERE, _ROOT):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+from _common import JSONHandler, get_engine, list_samples        # noqa: E402
 
 
 class handler(JSONHandler):                                   # noqa: N801

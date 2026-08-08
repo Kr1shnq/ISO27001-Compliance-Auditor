@@ -5,8 +5,7 @@
   "functions": {
     "api/*.py": {
       "memory": 1024,
-      "maxDuration": 30,
-      "excludeFiles": "{app/**,tests/**,tools/**,docs/**,collector/**,**/__pycache__/**,**/*.pyc}"
+      "maxDuration": 30
     }
   },
   "headers": [

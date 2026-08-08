@@ -19,9 +19,18 @@ Request body (JSON): everything /api/audit accepts, plus:
 Response 200: application/pdf as a file attachment.
 """
 
+import os
 import re
+import sys
 
-from _common import JSONHandler, run_audit
+# See api/audit.py — Vercel does not guarantee api/ is on sys.path.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_ROOT = os.path.dirname(_HERE)
+for _p in (_HERE, _ROOT):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+from _common import JSONHandler, run_audit                       # noqa: E402
 
 
 def safe_filename(host: str) -> str:

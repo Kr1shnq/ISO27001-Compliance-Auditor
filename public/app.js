@@ -86,7 +86,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     S.baseline = await api('/api/baseline');
     renderIntro();
   } catch (err) {
-    showUploadError(`Could not reach the audit service: ${err.message}`);
+    // A failure here is almost always a deployment problem rather than a user
+    // one, so point at the self-check endpoint instead of leaving a bare code.
+    showUploadError(
+      `Could not reach the audit service: ${err.message}. ` +
+      `Open /api/health for a diagnosis of what the server is missing.`);
   }
 });
 
