@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Real audit output — telemetry from live hosts must never be committed.
+# The files in samples/ are fictional and are tracked deliberately.
+ISOTelemetry_*.json
+ISOTelemetry_*.csv
+iso27001_results_*.json
+iso27001_register_*.csv
+iso27001_roadmap_*.csv
+iso27001_attestations.json
+ISO27001_Audit_*.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

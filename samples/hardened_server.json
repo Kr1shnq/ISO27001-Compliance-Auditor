@@ -1,0 +1,235 @@
+{
+  "metadata": {
+    "hostname": "SRV-APP-01",
+    "fqdn": "srv-app-01.corp.acme.local",
+    "os_caption": "Microsoft Windows Server 2022 Standard",
+    "os_version": "10.0.20348",
+    "os_build": "21H2",
+    "is_server": true,
+    "domain": "corp.acme.local",
+    "domain_joined": true,
+    "manufacturer": "Dell Inc.",
+    "model": "PowerEdge R650",
+    "serial_number": "SN-7122039",
+    "collected_utc": "2026-08-08T09:14:22Z",
+    "collector_version": "1.0.0",
+    "collected_elevated": true,
+    "collected_by": "CORP\\svc-audit"
+  },
+  "identity": {
+    "mfa_enabled": true,
+    "mfa_providers": [
+      "WindowsHelloForBusiness",
+      "SmartCard"
+    ],
+    "mfa_coverage_pct": 100,
+    "local_user_count": 4,
+    "local_admin_count": 2,
+    "local_admin_members": [
+      "CORP\\Domain Admins",
+      "SRV-APP-01\\svc-admin"
+    ],
+    "guest_account_enabled": false,
+    "default_admin_renamed": true,
+    "password_min_length": 15,
+    "password_max_age_days": 90,
+    "password_min_age_days": 1,
+    "password_history_size": 24,
+    "lockout_threshold": 5,
+    "lockout_duration_min": 15,
+    "lockout_window_min": 15,
+    "password_complexity_enabled": true,
+    "accounts_password_never_expires": 0,
+    "inactive_accounts_90d": 0,
+    "blank_password_accounts": 0,
+    "laps_enabled": true,
+    "credential_guard_enabled": true,
+    "standard_users_cannot_install": true,
+    "logon_banner_configured": true
+  },
+  "encryption": {
+    "disk_encryption_enabled": true,
+    "disk_encryption_type": "XtsAes256",
+    "encryption_percentage": 100,
+    "key_protector_present": true,
+    "key_protector_types": [
+      "Tpm",
+      "RecoveryPassword"
+    ],
+    "recovery_key_escrowed": true,
+    "unencrypted_volumes": [],
+    "unencrypted_volume_count": 0,
+    "removable_drive_encryption_required": true,
+    "tls10_enabled": false,
+    "tls11_enabled": false,
+    "tls12_enabled": true,
+    "tls13_enabled": true,
+    "ssl30_enabled": false,
+    "smb_signing_required": true,
+    "smbv1_enabled": false,
+    "fips_mode": true
+  },
+  "logging": {
+    "audit_logon_events": "Success and Failure",
+    "audit_logoff_events": "Success",
+    "audit_account_lockout": "Success and Failure",
+    "audit_object_access": "Success and Failure",
+    "audit_policy_change": "Success and Failure",
+    "audit_privilege_use": "Success and Failure",
+    "audit_account_management": "Success and Failure",
+    "audit_process_creation": "Success",
+    "logging_level": "Verbose",
+    "security_log_max_size_mb": 4096,
+    "security_log_retention_days": 365,
+    "security_log_record_count": 8421337,
+    "powershell_scriptblock_logging": true,
+    "powershell_module_logging": true,
+    "command_line_auditing": true,
+    "log_forwarding_enabled": true,
+    "siem_agents_detected": [
+      "MDE.Windows",
+      "splunkforwarder"
+    ],
+    "time_sync_configured": true,
+    "ntp_server": "dc01.corp.acme.local",
+    "time_offset_seconds": 0.4
+  },
+  "endpoint_protection": {
+    "antivirus_enabled": true,
+    "antivirus_product": "Microsoft Defender Antivirus",
+    "realtime_protection": true,
+    "behavior_monitoring": true,
+    "signature_age_days": 0,
+    "signature_version": "1.427.918.0",
+    "last_full_scan_days": 3,
+    "tamper_protection": true,
+    "cloud_protection_enabled": true,
+    "network_protection_enabled": true,
+    "pua_protection_enabled": true,
+    "asr_rules_enabled": 14,
+    "edr_enabled": true,
+    "firewall_domain": true,
+    "firewall_private": true,
+    "firewall_public": true,
+    "inbound_default_block": true,
+    "firewall_rule_count": 212,
+    "secure_boot_enabled": true,
+    "tpm_present": true,
+    "tpm_ready": true,
+    "tpm_version": "2.0",
+    "uac_enabled": true,
+    "applocker_or_wdac_enabled": true,
+    "usb_storage_blocked": true,
+    "screen_lock_timeout_min": 10,
+    "screensaver_password_required": true
+  },
+  "patching": {
+    "auto_update_enabled": true,
+    "last_patch_install_days": 6,
+    "last_patch_kb": "KB5041160",
+    "installed_patch_count": 74,
+    "missing_critical_patches": 0,
+    "pending_updates_total": 1,
+    "pending_reboot": false,
+    "os_supported": true,
+    "wsus_server": "http://wsus.corp.acme.local:8530"
+  },
+  "network": {
+    "rdp_enabled": true,
+    "rdp_nla_required": true,
+    "rdp_port": 3389,
+    "open_listening_ports": [
+      135,
+      445,
+      3389,
+      5985,
+      8443
+    ],
+    "listening_port_count": 5,
+    "risky_ports_open": [],
+    "risky_ports_open_count": 0,
+    "open_shares": [
+      "AppData"
+    ],
+    "open_shares_everyone": 0,
+    "anonymous_share_enumeration": false,
+    "netbios_enabled": false,
+    "llmnr_disabled": true,
+    "ipv6_enabled": true,
+    "dns_servers": [
+      "10.10.1.10",
+      "10.10.1.11"
+    ],
+    "dns_filtering_enabled": true,
+    "vpn_configured": true,
+    "host_firewall_isolation": true,
+    "wifi_open_networks": 0
+  },
+  "backup": {
+    "backup_configured": true,
+    "backup_product": "Veeam Backup & Replication",
+    "last_backup_days": 1,
+    "last_backup_result": "0",
+    "backup_encrypted": true,
+    "offsite_or_immutable": true,
+    "restore_tested_days": 45,
+    "shadow_copies_enabled": true,
+    "system_restore_enabled": true
+  },
+  "asset": {
+    "installed_software_count": 38,
+    "installed_software": [
+      "Microsoft Defender",
+      "Veeam Agent",
+      "Splunk Universal Forwarder"
+    ],
+    "unauthorized_software": [],
+    "unauthorized_software_count": 0,
+    "asset_tag": "ACME-SRV-0142",
+    "asset_owner": "Infrastructure Operations",
+    "data_classification_labels_enabled": true,
+    "dlp_enabled": true,
+    "mdm_enrolled": true
+  },
+  "services": {
+    "running_service_count": 96,
+    "remote_registry_running": false,
+    "print_spooler_running": false,
+    "telnet_installed": false,
+    "unnecessary_services_running": []
+  },
+  "configuration": {
+    "baseline_drift_count": 0,
+    "baseline_drift_items": [],
+    "baseline_reference": "CIS Microsoft Windows Server 2022 Benchmark v2.0"
+  },
+  "capacity": {
+    "system_drive_free_gb": 220.4,
+    "system_drive_total_gb": 512.0,
+    "system_drive_free_pct": 43.0,
+    "memory_total_gb": 128.0,
+    "memory_free_pct": 61.2,
+    "cpu_load_pct": 18
+  },
+  "hardware": {
+    "disk_health_ok": true,
+    "disk_count": 4,
+    "battery_present": false,
+    "chassis_type": "23"
+  },
+  "data": {
+    "retention_policy_configured": true
+  },
+  "attestations": {
+    "isms_policy_approved": true,
+    "security_roles_assigned": true,
+    "asset_inventory_maintained": true,
+    "access_control_policy": true,
+    "incident_response_plan": true,
+    "security_awareness_training": true,
+    "ict_continuity_tested": true,
+    "change_management_process": true,
+    "classification_scheme_defined": true,
+    "joiner_mover_leaver_process": true
+  }
+}

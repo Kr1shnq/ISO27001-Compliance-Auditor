@@ -1,0 +1,254 @@
+{
+  "metadata": {
+    "hostname": "WS-FIN-014",
+    "fqdn": "ws-fin-014.corp.acme.local",
+    "os_caption": "Microsoft Windows 10 Pro",
+    "os_version": "10.0.19045",
+    "os_build": "22H2",
+    "is_server": false,
+    "domain": "corp.acme.local",
+    "domain_joined": true,
+    "manufacturer": "Dell Inc.",
+    "model": "Latitude 7430",
+    "serial_number": "SN-8906245",
+    "collected_utc": "2026-08-08T09:14:22Z",
+    "collector_version": "1.0.0",
+    "collected_elevated": true,
+    "collected_by": "CORP\\svc-audit"
+  },
+  "identity": {
+    "mfa_enabled": false,
+    "mfa_providers": [],
+    "mfa_coverage_pct": 0,
+    "local_user_count": 9,
+    "local_admin_count": 7,
+    "local_admin_members": [
+      "WS-FIN-014\\Administrator",
+      "WS-FIN-014\\jsmith",
+      "WS-FIN-014\\temp-it",
+      "CORP\\Domain Admins"
+    ],
+    "guest_account_enabled": true,
+    "default_admin_renamed": false,
+    "password_min_length": 6,
+    "password_max_age_days": 0,
+    "password_min_age_days": 0,
+    "password_history_size": 0,
+    "lockout_threshold": 0,
+    "lockout_duration_min": 0,
+    "lockout_window_min": 0,
+    "password_complexity_enabled": false,
+    "accounts_password_never_expires": 4,
+    "inactive_accounts_90d": 3,
+    "blank_password_accounts": 1,
+    "laps_enabled": false,
+    "credential_guard_enabled": false,
+    "standard_users_cannot_install": false,
+    "logon_banner_configured": false
+  },
+  "encryption": {
+    "disk_encryption_enabled": false,
+    "disk_encryption_type": "None",
+    "encryption_percentage": 0,
+    "key_protector_present": false,
+    "key_protector_types": [],
+    "recovery_key_escrowed": false,
+    "unencrypted_volumes": [
+      "C:",
+      "D:"
+    ],
+    "unencrypted_volume_count": 2,
+    "removable_drive_encryption_required": false,
+    "tls10_enabled": true,
+    "tls11_enabled": true,
+    "tls12_enabled": true,
+    "tls13_enabled": false,
+    "ssl30_enabled": true,
+    "smb_signing_required": false,
+    "smbv1_enabled": true,
+    "fips_mode": false
+  },
+  "logging": {
+    "audit_logon_events": "No Auditing",
+    "audit_logoff_events": "No Auditing",
+    "audit_account_lockout": "No Auditing",
+    "audit_object_access": "No Auditing",
+    "audit_policy_change": "No Auditing",
+    "audit_privilege_use": "No Auditing",
+    "audit_account_management": "Success",
+    "audit_process_creation": "No Auditing",
+    "logging_level": "Minimal",
+    "security_log_max_size_mb": 20,
+    "security_log_retention_days": 4,
+    "security_log_record_count": 18422,
+    "powershell_scriptblock_logging": false,
+    "powershell_module_logging": false,
+    "command_line_auditing": false,
+    "log_forwarding_enabled": false,
+    "siem_agents_detected": [],
+    "time_sync_configured": false,
+    "ntp_server": null,
+    "time_offset_seconds": 47.8
+  },
+  "endpoint_protection": {
+    "antivirus_enabled": true,
+    "antivirus_product": "Microsoft Defender Antivirus",
+    "realtime_protection": false,
+    "behavior_monitoring": false,
+    "signature_age_days": 21,
+    "signature_version": "1.401.220.0",
+    "last_full_scan_days": 190,
+    "tamper_protection": false,
+    "cloud_protection_enabled": false,
+    "network_protection_enabled": false,
+    "pua_protection_enabled": false,
+    "asr_rules_enabled": 0,
+    "edr_enabled": false,
+    "firewall_domain": true,
+    "firewall_private": false,
+    "firewall_public": false,
+    "inbound_default_block": false,
+    "firewall_rule_count": 88,
+    "secure_boot_enabled": false,
+    "tpm_present": false,
+    "tpm_ready": false,
+    "tpm_version": null,
+    "uac_enabled": false,
+    "applocker_or_wdac_enabled": false,
+    "usb_storage_blocked": false,
+    "screen_lock_timeout_min": 60,
+    "screensaver_password_required": false
+  },
+  "patching": {
+    "auto_update_enabled": false,
+    "last_patch_install_days": 287,
+    "last_patch_kb": "KB5034763",
+    "installed_patch_count": 31,
+    "missing_critical_patches": 23,
+    "pending_updates_total": 41,
+    "pending_reboot": true,
+    "os_supported": false,
+    "wsus_server": null
+  },
+  "network": {
+    "rdp_enabled": true,
+    "rdp_nla_required": false,
+    "rdp_port": 3389,
+    "open_listening_ports": [
+      21,
+      23,
+      135,
+      139,
+      445,
+      3389,
+      5900
+    ],
+    "listening_port_count": 7,
+    "risky_ports_open": [
+      21,
+      23,
+      135,
+      139,
+      445,
+      3389,
+      5900
+    ],
+    "risky_ports_open_count": 7,
+    "open_shares": [
+      "Finance",
+      "Public",
+      "Temp"
+    ],
+    "open_shares_everyone": 3,
+    "anonymous_share_enumeration": true,
+    "netbios_enabled": true,
+    "llmnr_disabled": false,
+    "ipv6_enabled": true,
+    "dns_servers": [
+      "10.10.1.10"
+    ],
+    "dns_filtering_enabled": false,
+    "vpn_configured": false,
+    "host_firewall_isolation": false,
+    "wifi_open_networks": 2
+  },
+  "backup": {
+    "backup_configured": false,
+    "backup_product": null,
+    "last_backup_days": null,
+    "last_backup_result": null,
+    "backup_encrypted": false,
+    "offsite_or_immutable": false,
+    "restore_tested_days": null,
+    "shadow_copies_enabled": false,
+    "system_restore_enabled": false
+  },
+  "asset": {
+    "installed_software_count": 147,
+    "installed_software": [
+      "TeamViewer 13",
+      "uTorrent",
+      "Adobe Reader XI"
+    ],
+    "unauthorized_software": [
+      "TeamViewer 13",
+      "uTorrent",
+      "AnyDesk",
+      "Advanced IP Scanner"
+    ],
+    "unauthorized_software_count": 4,
+    "asset_tag": "",
+    "asset_owner": null,
+    "data_classification_labels_enabled": false,
+    "dlp_enabled": false,
+    "mdm_enrolled": false
+  },
+  "services": {
+    "running_service_count": 141,
+    "remote_registry_running": true,
+    "print_spooler_running": true,
+    "telnet_installed": true,
+    "unnecessary_services_running": [
+      "RemoteRegistry",
+      "SSDPSRV",
+      "upnphost",
+      "SNMP"
+    ]
+  },
+  "configuration": {
+    "baseline_drift_count": 13,
+    "baseline_drift_items": [
+      "SMBv1 enabled",
+      "SMB signing not required",
+      "TLS 1.0 enabled",
+      "TLS 1.1 enabled",
+      "SSL 3.0 enabled",
+      "UAC disabled",
+      "Secure Boot off",
+      "Guest account enabled",
+      "Telnet installed",
+      "Remote Registry running",
+      "LLMNR enabled",
+      "NetBIOS enabled",
+      "Anonymous enumeration allowed"
+    ],
+    "baseline_reference": "CIS Microsoft Windows 10 Benchmark v3.0"
+  },
+  "capacity": {
+    "system_drive_free_gb": 9.2,
+    "system_drive_total_gb": 256.0,
+    "system_drive_free_pct": 3.6,
+    "memory_total_gb": 8.0,
+    "memory_free_pct": 7.1,
+    "cpu_load_pct": 74
+  },
+  "hardware": {
+    "disk_health_ok": false,
+    "disk_count": 1,
+    "battery_present": true,
+    "chassis_type": "10"
+  },
+  "data": {
+    "retention_policy_configured": false
+  }
+}

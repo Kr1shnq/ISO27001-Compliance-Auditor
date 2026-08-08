@@ -1,0 +1,2208 @@
+{
+  "framework": "ISO/IEC 27001:2022 — Annex A",
+  "version": "1.0.0",
+  "generated_by": "ISO 27001 Compliance Auditor",
+  "themes": {
+    "Organizational": "A.5 — 37 controls",
+    "People": "A.6 — 8 controls",
+    "Physical": "A.7 — 14 controls",
+    "Technological": "A.8 — 34 controls"
+  },
+  "severity_weights": {
+    "High": 5,
+    "Medium": 3,
+    "Low": 1
+  },
+  "controls": [
+    {
+      "id": "A.5.1",
+      "title": "Policies for information security",
+      "theme": "Organizational",
+      "objective": "A documented, approved and communicated set of information security policies exists.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "isms_policy_approved",
+      "checks": [],
+      "remediation": [
+        "Draft an overarching Information Security Policy plus topic-specific policies (access control, cryptography, acceptable use, backup, incident response).",
+        "Obtain formal sign-off from top management and record the approval date and version.",
+        "Publish policies to a location all personnel can reach and record acknowledgement.",
+        "Schedule a review at least annually or after any significant change."
+      ]
+    },
+    {
+      "id": "A.5.2",
+      "title": "Information security roles and responsibilities",
+      "theme": "Organizational",
+      "objective": "Security roles are defined and allocated to named individuals.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "security_roles_assigned",
+      "checks": [],
+      "remediation": [
+        "Produce a RACI matrix covering ISMS owner, risk owner, asset owners, incident manager and DPO.",
+        "Reference the security responsibilities in job descriptions and employment contracts.",
+        "Review allocations whenever staff join, move or leave."
+      ]
+    },
+    {
+      "id": "A.5.3",
+      "title": "Segregation of duties",
+      "theme": "Organizational",
+      "objective": "Conflicting duties and areas of responsibility are separated.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "segregation_of_duties_reviewed",
+      "checks": [
+        {
+          "field": "identity.local_admin_count",
+          "op": "lte",
+          "label": "No more than 3 local administrator accounts",
+          "value": 3
+        }
+      ],
+      "remediation": [
+        "Map high-risk activities (approve, execute, review) and ensure no single account holds all three.",
+        "Reduce standing local administrator membership; use just-in-time elevation.",
+        "Where separation is impossible, add compensating monitoring and document the exception."
+      ]
+    },
+    {
+      "id": "A.5.4",
+      "title": "Management responsibilities",
+      "theme": "Organizational",
+      "objective": "Management requires all personnel to apply security per policy.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "management_enforces_policy",
+      "checks": [],
+      "remediation": [
+        "Add security objectives to management performance reviews.",
+        "Have leadership formally communicate policy expectations at least annually.",
+        "Track and report policy compliance to the management review meeting."
+      ]
+    },
+    {
+      "id": "A.5.5",
+      "title": "Contact with authorities",
+      "theme": "Organizational",
+      "objective": "Contacts with relevant authorities are maintained.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "authority_contacts_maintained",
+      "checks": [],
+      "remediation": [
+        "List relevant authorities (national CERT, data protection regulator, law enforcement, sector regulator).",
+        "Record named contacts, phone numbers and notification deadlines in the incident response plan.",
+        "Verify the contact list every 6 months."
+      ]
+    },
+    {
+      "id": "A.5.6",
+      "title": "Contact with special interest groups",
+      "theme": "Organizational",
+      "objective": "Contact is maintained with security forums and professional associations.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "special_interest_groups",
+      "checks": [],
+      "remediation": [
+        "Subscribe to vendor and sector advisory feeds (e.g. MSRC, CISA KEV, ISAC).",
+        "Register at least one named person with a relevant professional body.",
+        "Record how received advisories feed into the vulnerability management process."
+      ]
+    },
+    {
+      "id": "A.5.7",
+      "title": "Threat intelligence",
+      "theme": "Organizational",
+      "objective": "Threat information is collected and analysed to produce threat intelligence.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "threat_intel_process",
+      "checks": [
+        {
+          "field": "endpoint_protection.cloud_protection_enabled",
+          "op": "truthy",
+          "label": "Cloud-delivered threat intelligence enabled"
+        }
+      ],
+      "remediation": [
+        "Enable cloud-delivered protection / reputation services on endpoint security tooling.",
+        "Subscribe to strategic, tactical and operational threat feeds relevant to your sector.",
+        "Define who reviews intelligence, how often, and how it triggers action."
+      ]
+    },
+    {
+      "id": "A.5.8",
+      "title": "Information security in project management",
+      "theme": "Organizational",
+      "objective": "Security is integrated into project management.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "security_in_projects",
+      "checks": [],
+      "remediation": [
+        "Add a mandatory security risk assessment gate to the project lifecycle.",
+        "Require security acceptance criteria before go-live sign-off.",
+        "Record security decisions in the project risk register."
+      ]
+    },
+    {
+      "id": "A.5.9",
+      "title": "Inventory of information and other associated assets",
+      "theme": "Organizational",
+      "objective": "An inventory of information and associated assets is maintained with owners.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "asset_inventory_maintained",
+      "checks": [
+        {
+          "field": "asset.asset_tag",
+          "op": "non_empty",
+          "label": "Asset tag / identifier recorded"
+        },
+        {
+          "field": "asset.asset_owner",
+          "op": "non_empty",
+          "label": "Asset owner recorded"
+        },
+        {
+          "field": "asset.installed_software_count",
+          "op": "gt",
+          "label": "Installed software inventory captured",
+          "value": 0
+        }
+      ],
+      "remediation": [
+        "Populate an asset register covering hardware, software, data stores and cloud services.",
+        "Assign a named owner to every asset and record its classification.",
+        "Automate discovery so the register updates as devices and software change.",
+        "Reconcile the register against discovery data at least quarterly."
+      ]
+    },
+    {
+      "id": "A.5.10",
+      "title": "Acceptable use of information and other associated assets",
+      "theme": "Organizational",
+      "objective": "Rules for acceptable use of assets are defined, documented and enforced.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "acceptable_use_policy_signed",
+      "checks": [
+        {
+          "field": "endpoint_protection.usb_storage_blocked",
+          "op": "truthy",
+          "label": "Removable storage restricted"
+        },
+        {
+          "field": "endpoint_protection.applocker_or_wdac_enabled",
+          "op": "truthy",
+          "label": "Application control enforced"
+        }
+      ],
+      "remediation": [
+        "Publish an Acceptable Use Policy and capture signed acknowledgement from every user.",
+        "Enforce removable-media restrictions via Group Policy or Intune device control.",
+        "Deploy AppLocker or WDAC in enforce mode to restrict unapproved applications."
+      ]
+    },
+    {
+      "id": "A.5.11",
+      "title": "Return of assets",
+      "theme": "Organizational",
+      "objective": "Personnel return organisational assets on termination of employment or contract.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "asset_return_process",
+      "checks": [],
+      "remediation": [
+        "Add an asset-return checklist to the offboarding workflow.",
+        "Reconcile returned items against the asset register and record the outcome.",
+        "Remotely wipe or disable any asset not returned within the agreed window."
+      ]
+    },
+    {
+      "id": "A.5.12",
+      "title": "Classification of information",
+      "theme": "Organizational",
+      "objective": "Information is classified according to confidentiality, integrity and availability needs.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "classification_scheme_defined",
+      "checks": [
+        {
+          "field": "asset.data_classification_labels_enabled",
+          "op": "truthy",
+          "label": "Classification labelling technology enabled"
+        }
+      ],
+      "remediation": [
+        "Define a classification scheme (e.g. Public / Internal / Confidential / Restricted) with handling rules.",
+        "Deploy sensitivity labels (Microsoft Purview Information Protection or equivalent).",
+        "Train users on selecting the right label and audit label usage."
+      ]
+    },
+    {
+      "id": "A.5.13",
+      "title": "Labelling of information",
+      "theme": "Organizational",
+      "objective": "Procedures for labelling information are implemented in line with the classification scheme.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "labelling_procedure",
+      "checks": [
+        {
+          "field": "asset.data_classification_labels_enabled",
+          "op": "truthy",
+          "label": "Automatic / mandatory labelling active"
+        }
+      ],
+      "remediation": [
+        "Configure mandatory labelling so documents and email cannot be saved or sent unlabelled.",
+        "Apply visual markings (headers, footers, watermarks) driven by the label.",
+        "Extend labelling to physical media and printed output."
+      ]
+    },
+    {
+      "id": "A.5.14",
+      "title": "Information transfer",
+      "theme": "Organizational",
+      "objective": "Transfer rules and controls protect information in transit within and outside the organisation.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "transfer_agreements",
+      "checks": [
+        {
+          "field": "encryption.tls12_enabled",
+          "op": "truthy",
+          "label": "TLS 1.2 or higher available"
+        },
+        {
+          "field": "encryption.smb_signing_required",
+          "op": "truthy",
+          "label": "SMB signing required"
+        },
+        {
+          "field": "encryption.smbv1_enabled",
+          "op": "falsy",
+          "label": "Legacy SMBv1 disabled"
+        }
+      ],
+      "remediation": [
+        "Force TLS 1.2/1.3 for all transfers and disable SSL 3.0, TLS 1.0 and TLS 1.1.",
+        "Set 'Digitally sign communications (always)' for SMB client and server.",
+        "Remove the SMB 1.0/CIFS Windows feature entirely.",
+        "Document approved transfer channels and require encryption for external transfers."
+      ]
+    },
+    {
+      "id": "A.5.15",
+      "title": "Access control",
+      "theme": "Organizational",
+      "objective": "Access to information and assets is granted per an access control policy.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "access_control_policy",
+      "checks": [
+        {
+          "field": "identity.guest_account_enabled",
+          "op": "falsy",
+          "label": "Guest account disabled"
+        },
+        {
+          "field": "identity.local_admin_count",
+          "op": "lte",
+          "label": "Local admin group is minimal",
+          "value": 3
+        },
+        {
+          "field": "network.open_shares_everyone",
+          "op": "lte",
+          "label": "No shares granted to 'Everyone'",
+          "value": 0
+        }
+      ],
+      "remediation": [
+        "Disable the built-in Guest account and any generic shared logins.",
+        "Remove standing local administrator rights; grant on a role basis only.",
+        "Replace 'Everyone' share permissions with specific security groups.",
+        "Document and enforce a formal access control policy based on least privilege."
+      ]
+    },
+    {
+      "id": "A.5.16",
+      "title": "Identity management",
+      "theme": "Organizational",
+      "objective": "The full lifecycle of identities is managed.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "joiner_mover_leaver_process",
+      "checks": [
+        {
+          "field": "identity.inactive_accounts_90d",
+          "op": "lte",
+          "label": "No accounts dormant for 90+ days",
+          "value": 0
+        },
+        {
+          "field": "identity.default_admin_renamed",
+          "op": "truthy",
+          "label": "Default Administrator account renamed"
+        }
+      ],
+      "remediation": [
+        "Disable accounts with no logon in 90 days and delete after a defined retention period.",
+        "Rename the built-in Administrator account and create a decoy with no privileges.",
+        "Automate provisioning/deprovisioning from the HR system of record.",
+        "Recertify all identities at least every 6 months."
+      ]
+    },
+    {
+      "id": "A.5.17",
+      "title": "Authentication information",
+      "theme": "Organizational",
+      "objective": "Allocation and management of authentication information is controlled.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "identity.password_min_length",
+          "op": "gte",
+          "label": "Minimum password length >= 14",
+          "value": 14
+        },
+        {
+          "field": "identity.password_complexity_enabled",
+          "op": "truthy",
+          "label": "Complexity enforced"
+        },
+        {
+          "field": "identity.password_history_size",
+          "op": "gte",
+          "label": "Password history >= 24",
+          "value": 24
+        },
+        {
+          "field": "identity.lockout_threshold",
+          "op": "gte",
+          "label": "Account lockout is enabled",
+          "value": 1
+        },
+        {
+          "field": "identity.lockout_threshold",
+          "op": "lte",
+          "label": "Lockout threshold is <= 10 attempts",
+          "value": 10
+        },
+        {
+          "field": "identity.lockout_duration_min",
+          "op": "gte",
+          "label": "Lockout duration >= 15 minutes",
+          "value": 15
+        },
+        {
+          "field": "identity.blank_password_accounts",
+          "op": "lte",
+          "label": "No accounts permit a blank password",
+          "value": 0
+        },
+        {
+          "field": "identity.laps_enabled",
+          "op": "truthy",
+          "label": "Local admin password solution (LAPS) in use"
+        }
+      ],
+      "remediation": [
+        "Set minimum password length to 14+ characters via Group Policy or Intune.",
+        "Enable complexity requirements and a password history of 24.",
+        "Configure account lockout: threshold 5-10, duration 15 minutes, reset counter 15 minutes.",
+        "Deploy Windows LAPS so every device has a unique, rotated local admin password.",
+        "Move toward passwordless / phishing-resistant authentication where supported."
+      ]
+    },
+    {
+      "id": "A.5.18",
+      "title": "Access rights",
+      "theme": "Organizational",
+      "objective": "Access rights are provisioned, reviewed, modified and removed per policy.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "access_review_performed",
+      "checks": [
+        {
+          "field": "identity.accounts_password_never_expires",
+          "op": "lte",
+          "label": "No accounts flagged 'password never expires'",
+          "value": 0
+        },
+        {
+          "field": "identity.inactive_accounts_90d",
+          "op": "lte",
+          "label": "No stale accounts retaining access",
+          "value": 0
+        }
+      ],
+      "remediation": [
+        "Clear the 'password never expires' flag except for documented, vaulted service accounts.",
+        "Run a formal access recertification campaign with owner sign-off every 6 months.",
+        "Revoke all access within 24 hours of termination and evidence the revocation."
+      ]
+    },
+    {
+      "id": "A.5.19",
+      "title": "Information security in supplier relationships",
+      "theme": "Organizational",
+      "objective": "Risks from supplier use of organisational assets are managed.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "supplier_risk_process",
+      "checks": [],
+      "remediation": [
+        "Maintain a supplier register with a criticality rating for each.",
+        "Perform security due diligence before onboarding and re-assess annually for critical suppliers.",
+        "Define what suppliers may access and under what conditions."
+      ]
+    },
+    {
+      "id": "A.5.20",
+      "title": "Addressing information security within supplier agreements",
+      "theme": "Organizational",
+      "objective": "Security requirements are agreed with each supplier in writing.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "supplier_security_clauses",
+      "checks": [],
+      "remediation": [
+        "Add security schedules to contracts: incident notification SLA, right to audit, sub-processor rules, data return/destruction.",
+        "Require evidence of certification (ISO 27001, SOC 2) where proportionate.",
+        "Track contract renewal dates so clauses stay current."
+      ]
+    },
+    {
+      "id": "A.5.21",
+      "title": "Managing information security in the ICT supply chain",
+      "theme": "Organizational",
+      "objective": "Risks associated with the ICT products and services supply chain are managed.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "ict_supply_chain_managed",
+      "checks": [],
+      "remediation": [
+        "Require a software bill of materials (SBOM) from critical software vendors.",
+        "Verify component authenticity and code signing before deployment.",
+        "Assess the security posture of upstream sub-suppliers for critical services."
+      ]
+    },
+    {
+      "id": "A.5.22",
+      "title": "Monitoring, review and change management of supplier services",
+      "theme": "Organizational",
+      "objective": "Supplier service delivery is monitored, reviewed and changes are managed.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "supplier_service_reviews",
+      "checks": [],
+      "remediation": [
+        "Hold scheduled service reviews with critical suppliers and minute the security items.",
+        "Review supplier assurance reports (SOC 2 Type II, pen test summaries) on receipt.",
+        "Assess the security impact of any supplier-initiated change before accepting it."
+      ]
+    },
+    {
+      "id": "A.5.23",
+      "title": "Information security for use of cloud services",
+      "theme": "Organizational",
+      "objective": "Processes for acquisition, use, management and exit of cloud services are defined.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "cloud_security_process",
+      "checks": [],
+      "remediation": [
+        "Maintain a register of sanctioned cloud services and block unsanctioned ones.",
+        "Document the shared responsibility split for each service.",
+        "Apply CIS/vendor benchmarks to cloud tenant configuration and monitor drift.",
+        "Define and test an exit plan including data export and deletion."
+      ]
+    },
+    {
+      "id": "A.5.24",
+      "title": "Information security incident management planning and preparation",
+      "theme": "Organizational",
+      "objective": "The organisation plans and prepares for incident management.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "incident_response_plan",
+      "checks": [],
+      "remediation": [
+        "Publish an incident response plan defining severity levels, roles and escalation paths.",
+        "Maintain 24/7 contact details for the response team and key third parties.",
+        "Run a tabletop exercise at least annually and record lessons learned."
+      ]
+    },
+    {
+      "id": "A.5.25",
+      "title": "Assessment and decision on information security events",
+      "theme": "Organizational",
+      "objective": "Events are assessed and classified as incidents or not.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "event_triage_process",
+      "checks": [
+        {
+          "field": "logging.log_forwarding_enabled",
+          "op": "truthy",
+          "label": "Events forwarded to a central platform / SIEM"
+        }
+      ],
+      "remediation": [
+        "Forward Windows event logs to a SIEM or central collector.",
+        "Define triage criteria that turn an event into a classified incident.",
+        "Record the assessment decision and rationale for every escalated event."
+      ]
+    },
+    {
+      "id": "A.5.26",
+      "title": "Response to information security incidents",
+      "theme": "Organizational",
+      "objective": "Incidents are responded to in accordance with documented procedures.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "incident_response_executed",
+      "checks": [],
+      "remediation": [
+        "Write per-scenario runbooks (ransomware, account compromise, data loss).",
+        "Log every response action with timestamps in a ticketing system.",
+        "Confirm containment, eradication and recovery steps before closing an incident."
+      ]
+    },
+    {
+      "id": "A.5.27",
+      "title": "Learning from information security incidents",
+      "theme": "Organizational",
+      "objective": "Knowledge from incidents is used to strengthen controls.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "post_incident_review",
+      "checks": [],
+      "remediation": [
+        "Hold a blameless post-incident review for every high-severity incident.",
+        "Convert root causes into tracked corrective actions with owners and dates.",
+        "Feed incident trends into the annual risk assessment."
+      ]
+    },
+    {
+      "id": "A.5.28",
+      "title": "Collection of evidence",
+      "theme": "Organizational",
+      "objective": "Procedures exist for the identification, collection and preservation of evidence.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "forensic_procedure",
+      "checks": [
+        {
+          "field": "logging.security_log_retention_days",
+          "op": "gte",
+          "label": "Security log retained at least 90 days",
+          "value": 90
+        },
+        {
+          "field": "logging.security_log_max_size_mb",
+          "op": "gte",
+          "label": "Security log sized at least 1 GB",
+          "value": 1024
+        }
+      ],
+      "remediation": [
+        "Increase the Security event log to 1 GB or more and set retention to 90+ days.",
+        "Archive logs to immutable/WORM storage so they cannot be altered.",
+        "Document a chain-of-custody procedure and identify a forensics provider in advance."
+      ]
+    },
+    {
+      "id": "A.5.29",
+      "title": "Information security during disruption",
+      "theme": "Organizational",
+      "objective": "Security is maintained during disruption.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "bc_security_maintained",
+      "checks": [],
+      "remediation": [
+        "Document how each security control operates in degraded / failover mode.",
+        "Ensure DR environments enforce the same access control and logging as production.",
+        "Include security validation in every business continuity test."
+      ]
+    },
+    {
+      "id": "A.5.30",
+      "title": "ICT readiness for business continuity",
+      "theme": "Organizational",
+      "objective": "ICT readiness is planned, implemented, maintained and tested against continuity objectives.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "ict_continuity_tested",
+      "checks": [
+        {
+          "field": "backup.backup_configured",
+          "op": "truthy",
+          "label": "Backup solution configured"
+        },
+        {
+          "field": "backup.restore_tested_days",
+          "op": "lte",
+          "label": "Restore tested within the last 180 days",
+          "value": 180
+        }
+      ],
+      "remediation": [
+        "Define RTO and RPO per service and design backup frequency to meet them.",
+        "Configure and verify a working backup job on every in-scope system.",
+        "Perform and document a full restore test at least every 6 months."
+      ]
+    },
+    {
+      "id": "A.5.31",
+      "title": "Legal, statutory, regulatory and contractual requirements",
+      "theme": "Organizational",
+      "objective": "Applicable legal and contractual requirements are identified and met.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "legal_register_maintained",
+      "checks": [],
+      "remediation": [
+        "Maintain a legal and regulatory register mapped to controls that satisfy each obligation.",
+        "Assign an owner to monitor changes in law affecting the ISMS scope.",
+        "Review the register at least annually with legal counsel."
+      ]
+    },
+    {
+      "id": "A.5.32",
+      "title": "Intellectual property rights",
+      "theme": "Organizational",
+      "objective": "Procedures protect intellectual property rights, including software licensing.",
+      "mode": "hybrid",
+      "severity": "Low",
+      "attestation": "ipr_compliance",
+      "checks": [
+        {
+          "field": "asset.unauthorized_software_count",
+          "op": "lte",
+          "label": "No unlicensed / unauthorised software detected",
+          "value": 0
+        }
+      ],
+      "remediation": [
+        "Reconcile installed software against purchased licence entitlements.",
+        "Remove or license any software flagged as unauthorised.",
+        "Block installation of unapproved software with application control."
+      ]
+    },
+    {
+      "id": "A.5.33",
+      "title": "Protection of records",
+      "theme": "Organizational",
+      "objective": "Records are protected from loss, destruction, falsification and unauthorised access.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "records_retention_schedule",
+      "checks": [
+        {
+          "field": "logging.security_log_retention_days",
+          "op": "gte",
+          "label": "Log records retained per schedule",
+          "value": 90
+        },
+        {
+          "field": "backup.backup_encrypted",
+          "op": "truthy",
+          "label": "Backup copies of records encrypted"
+        }
+      ],
+      "remediation": [
+        "Publish a retention schedule stating how long each record type is kept and why.",
+        "Encrypt backups and apply immutability / legal-hold where records are regulated.",
+        "Restrict deletion rights on record repositories and log all deletions."
+      ]
+    },
+    {
+      "id": "A.5.34",
+      "title": "Privacy and protection of PII",
+      "theme": "Organizational",
+      "objective": "Privacy and PII protection requirements are identified and met.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "privacy_requirements_met",
+      "checks": [
+        {
+          "field": "asset.dlp_enabled",
+          "op": "truthy",
+          "label": "Data loss prevention active"
+        },
+        {
+          "field": "encryption.disk_encryption_enabled",
+          "op": "truthy",
+          "label": "PII at rest protected by disk encryption"
+        }
+      ],
+      "remediation": [
+        "Map where PII is stored, processed and transmitted, and record the lawful basis.",
+        "Enable DLP policies that detect and block unauthorised PII egress.",
+        "Ensure full-disk encryption on every device that may hold PII.",
+        "Define and test the data subject request and breach notification workflow."
+      ]
+    },
+    {
+      "id": "A.5.35",
+      "title": "Independent review of information security",
+      "theme": "Organizational",
+      "objective": "The security approach is independently reviewed at planned intervals.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "independent_review_done",
+      "checks": [],
+      "remediation": [
+        "Schedule an internal ISMS audit programme covering all clauses and Annex A controls annually.",
+        "Use auditors independent of the area being audited.",
+        "Track findings to closure and report results to management review."
+      ]
+    },
+    {
+      "id": "A.5.36",
+      "title": "Compliance with policies, rules and standards for information security",
+      "theme": "Organizational",
+      "objective": "Compliance with the security policy and standards is regularly reviewed.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "compliance_monitoring",
+      "checks": [
+        {
+          "field": "patching.os_supported",
+          "op": "truthy",
+          "label": "Operating system is vendor-supported"
+        },
+        {
+          "field": "configuration.baseline_drift_count",
+          "op": "lte",
+          "label": "Configuration drift from baseline is minimal",
+          "value": 5
+        }
+      ],
+      "remediation": [
+        "Run automated configuration compliance scans (this tool, SCM, Intune compliance policies).",
+        "Upgrade or isolate any system running an unsupported operating system.",
+        "Report compliance metrics to management on a fixed cadence."
+      ]
+    },
+    {
+      "id": "A.5.37",
+      "title": "Documented operating procedures",
+      "theme": "Organizational",
+      "objective": "Operating procedures for information processing facilities are documented and available.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "operating_procedures_documented",
+      "checks": [],
+      "remediation": [
+        "Document runbooks for backup, patching, account administration and incident handling.",
+        "Store procedures where operators can reach them during an outage (including offline).",
+        "Review each procedure annually and after any material change."
+      ]
+    },
+    {
+      "id": "A.6.1",
+      "title": "Screening",
+      "theme": "People",
+      "objective": "Background verification is carried out on candidates before employment.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "background_screening",
+      "checks": [],
+      "remediation": [
+        "Define screening levels proportionate to role risk and applicable law.",
+        "Verify identity, right to work, references and qualifications before start date.",
+        "Re-screen personnel moving into high-privilege roles."
+      ]
+    },
+    {
+      "id": "A.6.2",
+      "title": "Terms and conditions of employment",
+      "theme": "People",
+      "objective": "Employment agreements state security responsibilities.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "employment_terms_security",
+      "checks": [],
+      "remediation": [
+        "Insert information security obligations into employment and contractor agreements.",
+        "State that obligations survive termination where applicable.",
+        "Retain signed copies as evidence."
+      ]
+    },
+    {
+      "id": "A.6.3",
+      "title": "Information security awareness, education and training",
+      "theme": "People",
+      "objective": "Personnel receive appropriate security awareness training and updates.",
+      "mode": "manual",
+      "severity": "High",
+      "attestation": "security_awareness_training",
+      "checks": [],
+      "remediation": [
+        "Deliver induction training before granting system access.",
+        "Run refresher training at least annually plus periodic phishing simulations.",
+        "Track completion rates and follow up non-completers.",
+        "Provide role-specific training for developers and privileged administrators."
+      ]
+    },
+    {
+      "id": "A.6.4",
+      "title": "Disciplinary process",
+      "theme": "People",
+      "objective": "A formal disciplinary process for security policy violations exists and is communicated.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "disciplinary_process",
+      "checks": [],
+      "remediation": [
+        "Document a graduated disciplinary process for security violations.",
+        "Communicate it as part of policy acknowledgement.",
+        "Apply it consistently and record outcomes."
+      ]
+    },
+    {
+      "id": "A.6.5",
+      "title": "Responsibilities after termination or change of employment",
+      "theme": "People",
+      "objective": "Post-employment security responsibilities are defined and enforced.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "post_termination_duties",
+      "checks": [],
+      "remediation": [
+        "Define which obligations (confidentiality, IP) continue after employment ends.",
+        "Remind leavers of these duties in the exit interview and record acknowledgement.",
+        "Confirm all access is revoked as part of the offboarding checklist."
+      ]
+    },
+    {
+      "id": "A.6.6",
+      "title": "Confidentiality or non-disclosure agreements",
+      "theme": "People",
+      "objective": "NDAs reflecting protection needs are identified, documented and signed.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "nda_in_place",
+      "checks": [],
+      "remediation": [
+        "Require signed NDAs from employees, contractors and third parties before access.",
+        "Review NDA wording against current classification and legal requirements annually.",
+        "Store executed agreements in a retrievable repository."
+      ]
+    },
+    {
+      "id": "A.6.7",
+      "title": "Remote working",
+      "theme": "People",
+      "objective": "Security measures protect information accessed or stored outside organisational premises.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "remote_working_policy",
+      "checks": [
+        {
+          "field": "encryption.disk_encryption_enabled",
+          "op": "truthy",
+          "label": "Full-disk encryption enabled on the device"
+        },
+        {
+          "field": "network.vpn_configured",
+          "op": "truthy",
+          "label": "Managed VPN client present"
+        },
+        {
+          "field": "endpoint_protection.screen_lock_timeout_min",
+          "op": "lte",
+          "label": "Screen lock after 15 minutes or less",
+          "value": 15
+        }
+      ],
+      "remediation": [
+        "Enable BitLocker (or equivalent) on every mobile and remote-working device.",
+        "Require an always-on or managed VPN for access to internal resources.",
+        "Enforce a 10-15 minute screen lock with password resume.",
+        "Publish a remote working policy covering home networks, public Wi-Fi and physical security."
+      ]
+    },
+    {
+      "id": "A.6.8",
+      "title": "Information security event reporting",
+      "theme": "People",
+      "objective": "Personnel can report observed or suspected security events through appropriate channels.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "event_reporting_channel",
+      "checks": [],
+      "remediation": [
+        "Publish a single, well-known reporting channel (email alias, portal button, hotline).",
+        "Guarantee no-blame reporting to encourage early disclosure.",
+        "Acknowledge every report and confirm the outcome to the reporter."
+      ]
+    },
+    {
+      "id": "A.7.1",
+      "title": "Physical security perimeters",
+      "theme": "Physical",
+      "objective": "Security perimeters are defined and used to protect areas containing information assets.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "physical_perimeter_defined",
+      "checks": [],
+      "remediation": [
+        "Document site perimeters and identify which assets sit inside each.",
+        "Ensure walls, doors and windows to secure areas resist forced entry.",
+        "Inspect perimeter integrity on a scheduled basis."
+      ]
+    },
+    {
+      "id": "A.7.2",
+      "title": "Physical entry",
+      "theme": "Physical",
+      "objective": "Secure areas are protected by appropriate entry controls.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "physical_entry_controls",
+      "checks": [],
+      "remediation": [
+        "Deploy badge or biometric access to secure areas and log every entry.",
+        "Escort and sign in all visitors; issue visibly distinct visitor badges.",
+        "Review access lists to secure areas quarterly."
+      ]
+    },
+    {
+      "id": "A.7.3",
+      "title": "Securing offices, rooms and facilities",
+      "theme": "Physical",
+      "objective": "Physical security for offices, rooms and facilities is designed and applied.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "facilities_secured",
+      "checks": [],
+      "remediation": [
+        "Avoid signage that identifies sensitive processing areas.",
+        "Lock server, comms and records rooms independently of the general office.",
+        "Keep directories listing sensitive facility locations out of public reach."
+      ]
+    },
+    {
+      "id": "A.7.4",
+      "title": "Physical security monitoring",
+      "theme": "Physical",
+      "objective": "Premises are continuously monitored for unauthorised physical access.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "physical_monitoring",
+      "checks": [],
+      "remediation": [
+        "Install CCTV and intruder alarms covering entrances to secure areas.",
+        "Set a retention period for footage that meets investigation and legal needs.",
+        "Test alarm response procedures periodically."
+      ]
+    },
+    {
+      "id": "A.7.5",
+      "title": "Protecting against physical and environmental threats",
+      "theme": "Physical",
+      "objective": "Protection against physical and environmental threats is designed and implemented.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "environmental_protection",
+      "checks": [],
+      "remediation": [
+        "Assess flood, fire, seismic and civil-unrest risk for each site.",
+        "Install fire detection/suppression and environmental monitoring in technical rooms.",
+        "Site critical equipment away from water pipes and external walls."
+      ]
+    },
+    {
+      "id": "A.7.6",
+      "title": "Working in secure areas",
+      "theme": "Physical",
+      "objective": "Security measures for working in secure areas are designed and implemented.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "secure_area_rules",
+      "checks": [],
+      "remediation": [
+        "Publish rules for secure areas (no unescorted work, no recording devices).",
+        "Restrict knowledge of secure area activity on a need-to-know basis.",
+        "Keep secure areas locked and periodically inspected when vacant."
+      ]
+    },
+    {
+      "id": "A.7.7",
+      "title": "Clear desk and clear screen",
+      "theme": "Physical",
+      "objective": "Clear desk and clear screen rules are defined and enforced.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "clear_desk_policy",
+      "checks": [
+        {
+          "field": "endpoint_protection.screen_lock_timeout_min",
+          "op": "lte",
+          "label": "Automatic screen lock <= 15 minutes",
+          "value": 15
+        },
+        {
+          "field": "endpoint_protection.screensaver_password_required",
+          "op": "truthy",
+          "label": "Password required to resume from lock"
+        }
+      ],
+      "remediation": [
+        "Set the inactivity lock to 10-15 minutes and require a password on resume via GPO/Intune.",
+        "Publish and spot-check a clear desk policy covering paper and removable media.",
+        "Provide lockable storage and secure shredding at every desk area."
+      ]
+    },
+    {
+      "id": "A.7.8",
+      "title": "Equipment siting and protection",
+      "theme": "Physical",
+      "objective": "Equipment is sited securely and protected.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "equipment_siting",
+      "checks": [],
+      "remediation": [
+        "Position screens so sensitive information is not visible to passers-by.",
+        "Secure equipment in racks or with locks in shared and public areas.",
+        "Control eating, drinking and smoking near critical equipment."
+      ]
+    },
+    {
+      "id": "A.7.9",
+      "title": "Security of assets off-premises",
+      "theme": "Physical",
+      "objective": "Assets used away from organisational premises are protected.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "offsite_asset_protection",
+      "checks": [
+        {
+          "field": "encryption.disk_encryption_enabled",
+          "op": "truthy",
+          "label": "Device encrypted for off-premises use"
+        },
+        {
+          "field": "endpoint_protection.tpm_present",
+          "op": "truthy",
+          "label": "TPM present to protect encryption keys"
+        }
+      ],
+      "remediation": [
+        "Enable BitLocker with TPM (plus PIN for high-risk roles) on all portable devices.",
+        "Register off-site assets and record the responsible custodian.",
+        "Enable remote lock and wipe through the MDM platform.",
+        "Instruct users never to leave devices unattended in vehicles or public spaces."
+      ]
+    },
+    {
+      "id": "A.7.10",
+      "title": "Storage media",
+      "theme": "Physical",
+      "objective": "Storage media is managed through acquisition, use, transportation and disposal.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "media_handling_procedure",
+      "checks": [
+        {
+          "field": "endpoint_protection.usb_storage_blocked",
+          "op": "truthy",
+          "label": "Unmanaged removable media blocked"
+        },
+        {
+          "field": "encryption.removable_drive_encryption_required",
+          "op": "truthy",
+          "label": "Encryption required for writable removable media"
+        }
+      ],
+      "remediation": [
+        "Block unmanaged USB mass storage; allow only encrypted, registered media.",
+        "Enable BitLocker To Go and deny write access to unencrypted removable drives.",
+        "Log the movement of media containing classified information."
+      ]
+    },
+    {
+      "id": "A.7.11",
+      "title": "Supporting utilities",
+      "theme": "Physical",
+      "objective": "Facilities are protected from power failures and other utility disruptions.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "utilities_protected",
+      "checks": [],
+      "remediation": [
+        "Provide UPS coverage for critical equipment and test batteries on schedule.",
+        "Arrange generator or alternate power for sites with long recovery objectives.",
+        "Monitor utility alarms and include utility failure in continuity testing."
+      ]
+    },
+    {
+      "id": "A.7.12",
+      "title": "Cabling security",
+      "theme": "Physical",
+      "objective": "Power and telecommunications cabling is protected from interception and damage.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "cabling_secured",
+      "checks": [],
+      "remediation": [
+        "Route network cabling through conduit and avoid public or unsecured areas.",
+        "Separate power and data cabling to limit interference.",
+        "Label and document patching; lock comms cabinets."
+      ]
+    },
+    {
+      "id": "A.7.13",
+      "title": "Equipment maintenance",
+      "theme": "Physical",
+      "objective": "Equipment is maintained correctly to ensure availability and integrity.",
+      "mode": "hybrid",
+      "severity": "Low",
+      "attestation": "maintenance_schedule",
+      "checks": [
+        {
+          "field": "hardware.disk_health_ok",
+          "op": "truthy",
+          "label": "Disk health reported healthy"
+        }
+      ],
+      "remediation": [
+        "Follow vendor maintenance intervals and use authorised service providers.",
+        "Monitor SMART / predictive failure alerts and replace failing disks promptly.",
+        "Remove or sanitise data before equipment leaves the site for repair."
+      ]
+    },
+    {
+      "id": "A.7.14",
+      "title": "Secure disposal or re-use of equipment",
+      "theme": "Physical",
+      "objective": "Equipment is verified to be free of sensitive data before disposal or re-use.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "secure_disposal",
+      "checks": [],
+      "remediation": [
+        "Cryptographically erase or physically destroy media before disposal.",
+        "Obtain certificates of destruction from disposal vendors and retain them.",
+        "Update the asset register when an asset is disposed of or reassigned."
+      ]
+    },
+    {
+      "id": "A.8.1",
+      "title": "User end point devices",
+      "theme": "Technological",
+      "objective": "Information on user endpoint devices is protected.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "encryption.disk_encryption_enabled",
+          "op": "truthy",
+          "label": "Full-disk encryption on"
+        },
+        {
+          "field": "endpoint_protection.antivirus_enabled",
+          "op": "truthy",
+          "label": "Anti-malware enabled"
+        },
+        {
+          "field": "endpoint_protection.uac_enabled",
+          "op": "truthy",
+          "label": "User Account Control enabled"
+        },
+        {
+          "field": "endpoint_protection.screen_lock_timeout_min",
+          "op": "lte",
+          "label": "Screen lock <= 15 minutes",
+          "value": 15
+        }
+      ],
+      "remediation": [
+        "Enable BitLocker on the OS volume and all fixed data volumes.",
+        "Ensure Microsoft Defender (or approved AV) is enabled with real-time protection.",
+        "Set UAC to 'Always notify' for administrators.",
+        "Enforce a 15-minute inactivity lock with password on resume."
+      ]
+    },
+    {
+      "id": "A.8.2",
+      "title": "Privileged access rights",
+      "theme": "Technological",
+      "objective": "Allocation and use of privileged access rights is restricted and managed.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "identity.local_admin_count",
+          "op": "lte",
+          "label": "Local administrators <= 3",
+          "value": 3
+        },
+        {
+          "field": "identity.laps_enabled",
+          "op": "truthy",
+          "label": "LAPS deployed for local admin passwords"
+        },
+        {
+          "field": "identity.credential_guard_enabled",
+          "op": "truthy",
+          "label": "Credential Guard protecting privileged credentials"
+        },
+        {
+          "field": "identity.default_admin_renamed",
+          "op": "truthy",
+          "label": "Built-in Administrator renamed"
+        }
+      ],
+      "remediation": [
+        "Remove standing local admin rights; use separate admin accounts or JIT elevation (PIM).",
+        "Deploy Windows LAPS to randomise and rotate local administrator passwords.",
+        "Enable Credential Guard (VBS) to block credential theft.",
+        "Rename the built-in Administrator account and audit its use.",
+        "Log and review all privileged session activity."
+      ]
+    },
+    {
+      "id": "A.8.3",
+      "title": "Information access restriction",
+      "theme": "Technological",
+      "objective": "Access to information and application functions is restricted per the access control policy.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "network.open_shares_everyone",
+          "op": "lte",
+          "label": "No file shares open to 'Everyone'",
+          "value": 0
+        },
+        {
+          "field": "identity.guest_account_enabled",
+          "op": "falsy",
+          "label": "Guest account disabled"
+        },
+        {
+          "field": "network.anonymous_share_enumeration",
+          "op": "falsy",
+          "label": "Anonymous share enumeration blocked"
+        }
+      ],
+      "remediation": [
+        "Replace 'Everyone' ACLs with least-privilege security groups on all shares.",
+        "Disable the Guest account and anonymous access.",
+        "Set 'Network access: Do not allow anonymous enumeration of SAM accounts and shares' to Enabled.",
+        "Review folder permissions against data classification annually."
+      ]
+    },
+    {
+      "id": "A.8.4",
+      "title": "Access to source code",
+      "theme": "Technological",
+      "objective": "Read and write access to source code and development tools is appropriately managed.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "source_code_access_controlled",
+      "checks": [],
+      "remediation": [
+        "Store source code in a managed repository with SSO and MFA enforced.",
+        "Require branch protection and peer review before merge to protected branches.",
+        "Audit repository permissions quarterly and remove unused collaborators.",
+        "Scan repositories for committed secrets."
+      ]
+    },
+    {
+      "id": "A.8.5",
+      "title": "Secure authentication",
+      "theme": "Technological",
+      "objective": "Secure authentication technologies and procedures are implemented.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "identity.mfa_enabled",
+          "op": "truthy",
+          "label": "Multi-factor authentication enabled"
+        },
+        {
+          "field": "identity.mfa_coverage_pct",
+          "op": "gte",
+          "label": "MFA covers >= 95% of accounts",
+          "value": 95
+        },
+        {
+          "field": "identity.lockout_threshold",
+          "op": "gte",
+          "label": "Account lockout is enabled",
+          "value": 1
+        },
+        {
+          "field": "identity.lockout_threshold",
+          "op": "lte",
+          "label": "Lockout threshold is <= 10 attempts",
+          "value": 10
+        },
+        {
+          "field": "network.rdp_nla_required",
+          "op": "truthy",
+          "label": "Network Level Authentication required for RDP"
+        }
+      ],
+      "remediation": [
+        "Enforce MFA for all interactive and remote access; prefer phishing-resistant factors (FIDO2, Windows Hello for Business).",
+        "Extend MFA coverage to 100% of accounts, including break-glass (with compensating controls).",
+        "Configure account lockout after 5-10 failed attempts.",
+        "Require Network Level Authentication on every RDP-enabled host.",
+        "Display a logon banner and suppress the last-logged-on username."
+      ]
+    },
+    {
+      "id": "A.8.6",
+      "title": "Capacity management",
+      "theme": "Technological",
+      "objective": "Resource use is monitored and adjusted to meet capacity requirements.",
+      "mode": "automated",
+      "severity": "Low",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "capacity.system_drive_free_pct",
+          "op": "gte",
+          "label": "System drive at least 15% free",
+          "value": 15
+        },
+        {
+          "field": "capacity.memory_free_pct",
+          "op": "gte",
+          "label": "At least 10% memory headroom",
+          "value": 10
+        }
+      ],
+      "remediation": [
+        "Free or extend the system volume to keep at least 15% headroom.",
+        "Configure alerting on disk, memory and CPU thresholds.",
+        "Produce capacity forecasts for critical systems and plan upgrades ahead of exhaustion."
+      ]
+    },
+    {
+      "id": "A.8.7",
+      "title": "Protection against malware",
+      "theme": "Technological",
+      "objective": "Protection against malware is implemented and supported by user awareness.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "endpoint_protection.antivirus_enabled",
+          "op": "truthy",
+          "label": "Anti-malware installed and on"
+        },
+        {
+          "field": "endpoint_protection.realtime_protection",
+          "op": "truthy",
+          "label": "Real-time protection on"
+        },
+        {
+          "field": "endpoint_protection.signature_age_days",
+          "op": "lte",
+          "label": "Signatures updated within 3 days",
+          "value": 3
+        },
+        {
+          "field": "endpoint_protection.tamper_protection",
+          "op": "truthy",
+          "label": "Tamper protection on"
+        },
+        {
+          "field": "endpoint_protection.asr_rules_enabled",
+          "op": "gte",
+          "label": "At least 5 attack surface reduction rules enforced",
+          "value": 5
+        }
+      ],
+      "remediation": [
+        "Enable Microsoft Defender Antivirus with real-time and cloud-delivered protection.",
+        "Ensure signature updates run at least daily; investigate devices >3 days stale.",
+        "Turn on Tamper Protection so the agent cannot be disabled locally.",
+        "Enable the recommended Attack Surface Reduction rules in Block mode.",
+        "Combine with user phishing awareness training."
+      ]
+    },
+    {
+      "id": "A.8.8",
+      "title": "Management of technical vulnerabilities",
+      "theme": "Technological",
+      "objective": "Information about technical vulnerabilities is obtained and exposure evaluated and addressed.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "patching.missing_critical_patches",
+          "op": "lte",
+          "label": "No missing critical / security updates",
+          "value": 0
+        },
+        {
+          "field": "patching.last_patch_install_days",
+          "op": "lte",
+          "label": "Patched within the last 35 days",
+          "value": 35
+        },
+        {
+          "field": "patching.os_supported",
+          "op": "truthy",
+          "label": "OS still receiving vendor updates"
+        },
+        {
+          "field": "patching.auto_update_enabled",
+          "op": "truthy",
+          "label": "Automatic updates enabled"
+        }
+      ],
+      "remediation": [
+        "Install all outstanding critical and security updates immediately.",
+        "Define patch SLAs (critical 7 days, high 14 days, others 35 days) and measure against them.",
+        "Enable automatic updates or an equivalent managed patching service (WSUS/Intune/SCCM).",
+        "Upgrade or decommission any operating system past end-of-support.",
+        "Run authenticated vulnerability scans monthly and track findings to closure."
+      ]
+    },
+    {
+      "id": "A.8.9",
+      "title": "Configuration management",
+      "theme": "Technological",
+      "objective": "Configurations of hardware, software, services and networks are established and monitored.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "endpoint_protection.secure_boot_enabled",
+          "op": "truthy",
+          "label": "Secure Boot enabled"
+        },
+        {
+          "field": "encryption.smbv1_enabled",
+          "op": "falsy",
+          "label": "SMBv1 removed"
+        },
+        {
+          "field": "services.telnet_installed",
+          "op": "falsy",
+          "label": "Telnet client/server not installed"
+        },
+        {
+          "field": "configuration.baseline_drift_count",
+          "op": "lte",
+          "label": "Baseline drift within tolerance",
+          "value": 5
+        },
+        {
+          "field": "endpoint_protection.uac_enabled",
+          "op": "truthy",
+          "label": "UAC enabled"
+        }
+      ],
+      "remediation": [
+        "Adopt a documented hardening baseline (CIS Benchmark or Microsoft Security Baseline).",
+        "Enable Secure Boot in UEFI firmware.",
+        "Remove the SMB 1.0/CIFS and Telnet Windows features.",
+        "Deploy the baseline via GPO or Intune and monitor drift continuously.",
+        "Require change approval before deviating from the baseline."
+      ]
+    },
+    {
+      "id": "A.8.10",
+      "title": "Information deletion",
+      "theme": "Technological",
+      "objective": "Information stored in systems and devices is deleted when no longer required.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "deletion_procedure",
+      "checks": [
+        {
+          "field": "data.retention_policy_configured",
+          "op": "truthy",
+          "label": "Automated retention / deletion policy configured"
+        }
+      ],
+      "remediation": [
+        "Configure retention labels or policies that delete data at end of life automatically.",
+        "Use secure deletion (cryptographic erase or multi-pass) for classified data.",
+        "Record deletions for regulated data to evidence compliance."
+      ]
+    },
+    {
+      "id": "A.8.11",
+      "title": "Data masking",
+      "theme": "Technological",
+      "objective": "Data masking is used in line with the access control and business requirements.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "data_masking_applied",
+      "checks": [],
+      "remediation": [
+        "Mask or tokenise sensitive fields in non-production environments.",
+        "Apply dynamic data masking in databases for users without a need to see full values.",
+        "Limit who can view unmasked data and log those views."
+      ]
+    },
+    {
+      "id": "A.8.12",
+      "title": "Data leakage prevention",
+      "theme": "Technological",
+      "objective": "Data leakage prevention measures are applied to systems and networks handling sensitive data.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "asset.dlp_enabled",
+          "op": "truthy",
+          "label": "DLP policy active"
+        },
+        {
+          "field": "endpoint_protection.usb_storage_blocked",
+          "op": "truthy",
+          "label": "Removable media egress controlled"
+        },
+        {
+          "field": "endpoint_protection.network_protection_enabled",
+          "op": "truthy",
+          "label": "Network protection / egress filtering on"
+        }
+      ],
+      "remediation": [
+        "Deploy endpoint and cloud DLP policies targeting your classified data types.",
+        "Restrict removable media and cloud sync clients for sensitive endpoints.",
+        "Enable Defender Network Protection and block known exfiltration destinations.",
+        "Start DLP in audit mode, tune, then move to block."
+      ]
+    },
+    {
+      "id": "A.8.13",
+      "title": "Information backup",
+      "theme": "Technological",
+      "objective": "Backup copies of information, software and systems are maintained and regularly tested.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "backup.backup_configured",
+          "op": "truthy",
+          "label": "Backup configured"
+        },
+        {
+          "field": "backup.last_backup_days",
+          "op": "lte",
+          "label": "Backup completed in last 7 days",
+          "value": 7
+        },
+        {
+          "field": "backup.backup_encrypted",
+          "op": "truthy",
+          "label": "Backups encrypted"
+        },
+        {
+          "field": "backup.offsite_or_immutable",
+          "op": "truthy",
+          "label": "Off-site or immutable copy held"
+        },
+        {
+          "field": "backup.restore_tested_days",
+          "op": "lte",
+          "label": "Restore tested within 180 days",
+          "value": 180
+        }
+      ],
+      "remediation": [
+        "Implement the 3-2-1-1 rule: 3 copies, 2 media types, 1 off-site, 1 immutable/offline.",
+        "Schedule backups to meet the defined RPO and alert on job failure.",
+        "Encrypt backup data at rest and in transit; protect the backup credentials separately.",
+        "Perform and document a restore test every 6 months."
+      ]
+    },
+    {
+      "id": "A.8.14",
+      "title": "Redundancy of information processing facilities",
+      "theme": "Technological",
+      "objective": "Processing facilities are implemented with sufficient redundancy to meet availability needs.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "redundancy_designed",
+      "checks": [
+        {
+          "field": "backup.shadow_copies_enabled",
+          "op": "truthy",
+          "label": "Volume Shadow Copies enabled for rapid recovery"
+        }
+      ],
+      "remediation": [
+        "Enable Volume Shadow Copy Service on data volumes for fast local rollback.",
+        "Design N+1 redundancy for components supporting critical services.",
+        "Test failover of redundant components at least annually."
+      ]
+    },
+    {
+      "id": "A.8.15",
+      "title": "Logging",
+      "theme": "Technological",
+      "objective": "Logs recording activities, exceptions, faults and other relevant events are produced and retained.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "logging.logging_level",
+          "op": "in",
+          "label": "Logging level at least Standard",
+          "value": [
+            "Standard",
+            "Verbose"
+          ]
+        },
+        {
+          "field": "logging.audit_logon_events",
+          "op": "contains",
+          "label": "Logon failures audited",
+          "value": "Failure"
+        },
+        {
+          "field": "logging.audit_account_management",
+          "op": "contains",
+          "label": "Account management audited",
+          "value": "Success"
+        },
+        {
+          "field": "logging.audit_policy_change",
+          "op": "contains",
+          "label": "Policy changes audited",
+          "value": "Success"
+        },
+        {
+          "field": "logging.audit_privilege_use",
+          "op": "contains",
+          "label": "Privilege use audited",
+          "value": "Failure"
+        },
+        {
+          "field": "logging.security_log_retention_days",
+          "op": "gte",
+          "label": "Logs retained >= 90 days",
+          "value": 90
+        },
+        {
+          "field": "logging.powershell_scriptblock_logging",
+          "op": "truthy",
+          "label": "PowerShell script block logging on"
+        },
+        {
+          "field": "logging.command_line_auditing",
+          "op": "truthy",
+          "label": "Process command line auditing on"
+        }
+      ],
+      "remediation": [
+        "Enable Advanced Audit Policy for Logon, Account Management, Policy Change, Privilege Use and Object Access.",
+        "Raise the Security log to 1 GB+ and retain at least 90 days (12 months preferred).",
+        "Enable PowerShell Script Block Logging and Module Logging.",
+        "Enable 'Include command line in process creation events' (Event ID 4688).",
+        "Protect logs from modification by forwarding them off-host."
+      ]
+    },
+    {
+      "id": "A.8.16",
+      "title": "Monitoring activities",
+      "theme": "Technological",
+      "objective": "Networks, systems and applications are monitored for anomalous behaviour and action is taken.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "logging.log_forwarding_enabled",
+          "op": "truthy",
+          "label": "Log forwarding to SIEM / central collector"
+        },
+        {
+          "field": "endpoint_protection.edr_enabled",
+          "op": "truthy",
+          "label": "EDR sensor installed and reporting"
+        },
+        {
+          "field": "endpoint_protection.cloud_protection_enabled",
+          "op": "truthy",
+          "label": "Cloud-delivered detection enabled"
+        }
+      ],
+      "remediation": [
+        "Configure Windows Event Forwarding or a SIEM agent on every in-scope host.",
+        "Deploy an EDR product with alerting routed to a monitored queue.",
+        "Define detection use cases and alert thresholds for your top risks.",
+        "Document who monitors alerts and the response time expectation."
+      ]
+    },
+    {
+      "id": "A.8.17",
+      "title": "Clock synchronization",
+      "theme": "Technological",
+      "objective": "Clocks are synchronised to approved time sources.",
+      "mode": "automated",
+      "severity": "Medium",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "logging.time_sync_configured",
+          "op": "truthy",
+          "label": "Time service configured"
+        },
+        {
+          "field": "logging.time_offset_seconds",
+          "op": "lte",
+          "label": "Clock within 5 seconds of the time source",
+          "value": 5
+        },
+        {
+          "field": "logging.ntp_server",
+          "op": "non_empty",
+          "label": "Authoritative time source set"
+        }
+      ],
+      "remediation": [
+        "Point the Windows Time service at an authoritative internal or trusted external NTP source.",
+        "Set the service to start automatically and verify with 'w32tm /query /status'.",
+        "Alert when offset exceeds a few seconds — log correlation depends on it."
+      ]
+    },
+    {
+      "id": "A.8.18",
+      "title": "Use of privileged utility programs",
+      "theme": "Technological",
+      "objective": "Use of utility programs capable of overriding controls is restricted and tightly controlled.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "endpoint_protection.applocker_or_wdac_enabled",
+          "op": "truthy",
+          "label": "Application control (AppLocker/WDAC) enforcing"
+        },
+        {
+          "field": "logging.powershell_scriptblock_logging",
+          "op": "truthy",
+          "label": "PowerShell activity logged"
+        },
+        {
+          "field": "services.remote_registry_running",
+          "op": "falsy",
+          "label": "Remote Registry service not running"
+        }
+      ],
+      "remediation": [
+        "Enforce AppLocker or WDAC policies restricting administrative and hacking utilities.",
+        "Enable PowerShell Constrained Language Mode for non-administrators.",
+        "Disable the Remote Registry service unless a documented need exists.",
+        "Log and review every use of privileged utilities."
+      ]
+    },
+    {
+      "id": "A.8.19",
+      "title": "Installation of software on operational systems",
+      "theme": "Technological",
+      "objective": "Procedures securely manage software installation on operational systems.",
+      "mode": "automated",
+      "severity": "Medium",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "asset.unauthorized_software_count",
+          "op": "lte",
+          "label": "No unauthorised software installed",
+          "value": 0
+        },
+        {
+          "field": "endpoint_protection.applocker_or_wdac_enabled",
+          "op": "truthy",
+          "label": "Software installation restricted"
+        },
+        {
+          "field": "identity.standard_users_cannot_install",
+          "op": "truthy",
+          "label": "Standard users cannot install software"
+        }
+      ],
+      "remediation": [
+        "Maintain an approved software catalogue and remove anything outside it.",
+        "Prevent standard users from installing software (no local admin, restricted MSI policy).",
+        "Deploy software only through a managed distribution channel with change approval.",
+        "Verify digital signatures before deployment."
+      ]
+    },
+    {
+      "id": "A.8.20",
+      "title": "Networks security",
+      "theme": "Technological",
+      "objective": "Networks and network devices are secured, managed and controlled.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "endpoint_protection.firewall_domain",
+          "op": "truthy",
+          "label": "Firewall on: Domain profile"
+        },
+        {
+          "field": "endpoint_protection.firewall_private",
+          "op": "truthy",
+          "label": "Firewall on: Private profile"
+        },
+        {
+          "field": "endpoint_protection.firewall_public",
+          "op": "truthy",
+          "label": "Firewall on: Public profile"
+        },
+        {
+          "field": "endpoint_protection.inbound_default_block",
+          "op": "truthy",
+          "label": "Default inbound action is Block"
+        },
+        {
+          "field": "network.risky_ports_open_count",
+          "op": "lte",
+          "label": "No high-risk ports listening (135/139/445/3389/23/21 exposed)",
+          "value": 0
+        }
+      ],
+      "remediation": [
+        "Enable Windows Defender Firewall on all three profiles with default inbound Block.",
+        "Close or firewall-restrict legacy and management ports (21, 23, 135, 139, 445, 3389).",
+        "Restrict RDP to a jump host or VPN-only source range.",
+        "Review firewall rules quarterly and remove unused ones."
+      ]
+    },
+    {
+      "id": "A.8.21",
+      "title": "Security of network services",
+      "theme": "Technological",
+      "objective": "Security mechanisms, service levels and requirements of network services are identified and monitored.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "encryption.tls10_enabled",
+          "op": "falsy",
+          "label": "TLS 1.0 disabled"
+        },
+        {
+          "field": "encryption.tls11_enabled",
+          "op": "falsy",
+          "label": "TLS 1.1 disabled"
+        },
+        {
+          "field": "encryption.tls12_enabled",
+          "op": "truthy",
+          "label": "TLS 1.2 enabled"
+        },
+        {
+          "field": "network.llmnr_disabled",
+          "op": "truthy",
+          "label": "LLMNR disabled"
+        },
+        {
+          "field": "network.netbios_enabled",
+          "op": "falsy",
+          "label": "NetBIOS over TCP/IP disabled"
+        }
+      ],
+      "remediation": [
+        "Disable SSL 2.0/3.0, TLS 1.0 and TLS 1.1 in the SCHANNEL registry keys; enable TLS 1.2/1.3.",
+        "Disable LLMNR and NetBIOS over TCP/IP to prevent name-poisoning relay attacks.",
+        "Agree security requirements and SLAs with network service providers in writing.",
+        "Monitor the availability and integrity of critical network services."
+      ]
+    },
+    {
+      "id": "A.8.22",
+      "title": "Segregation of networks",
+      "theme": "Technological",
+      "objective": "Groups of information services, users and systems are segregated in networks.",
+      "mode": "hybrid",
+      "severity": "Medium",
+      "attestation": "network_segmentation",
+      "checks": [
+        {
+          "field": "network.host_firewall_isolation",
+          "op": "truthy",
+          "label": "Host-based isolation rules present"
+        }
+      ],
+      "remediation": [
+        "Separate user, server, management and guest traffic into distinct VLANs/subnets.",
+        "Filter between segments with an explicit allow-list.",
+        "Place OT, legacy and unsupported systems in isolated segments.",
+        "Use host-based firewall rules as a second layer of isolation."
+      ]
+    },
+    {
+      "id": "A.8.23",
+      "title": "Web filtering",
+      "theme": "Technological",
+      "objective": "Access to external websites is managed to reduce exposure to malicious content.",
+      "mode": "automated",
+      "severity": "Medium",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "endpoint_protection.network_protection_enabled",
+          "op": "truthy",
+          "label": "Defender Network Protection / web protection on"
+        },
+        {
+          "field": "network.dns_filtering_enabled",
+          "op": "truthy",
+          "label": "Filtered/protective DNS resolver in use"
+        }
+      ],
+      "remediation": [
+        "Enable Defender Network Protection in Block mode (or a secure web gateway).",
+        "Point clients at a protective DNS service that blocks malicious domains.",
+        "Block known-risky categories and newly registered domains.",
+        "Publish the filtering policy and an exception request process."
+      ]
+    },
+    {
+      "id": "A.8.24",
+      "title": "Use of cryptography",
+      "theme": "Technological",
+      "objective": "Rules for effective use of cryptography, including key management, are defined and implemented.",
+      "mode": "automated",
+      "severity": "High",
+      "attestation": null,
+      "checks": [
+        {
+          "field": "encryption.disk_encryption_enabled",
+          "op": "truthy",
+          "label": "Data at rest encrypted"
+        },
+        {
+          "field": "encryption.disk_encryption_type",
+          "op": "in",
+          "label": "Approved encryption algorithm in use",
+          "value": [
+            "XtsAes256",
+            "XtsAes128",
+            "AES-256"
+          ]
+        },
+        {
+          "field": "encryption.unencrypted_volume_count",
+          "op": "lte",
+          "label": "No unencrypted fixed volumes",
+          "value": 0
+        },
+        {
+          "field": "encryption.key_protector_present",
+          "op": "truthy",
+          "label": "Encryption key protector (TPM/recovery key) configured"
+        },
+        {
+          "field": "encryption.tls12_enabled",
+          "op": "truthy",
+          "label": "Strong TLS available for data in transit"
+        }
+      ],
+      "remediation": [
+        "Encrypt every fixed volume with BitLocker XTS-AES-256.",
+        "Escrow recovery keys to Active Directory or Entra ID and verify escrow succeeded.",
+        "Publish a cryptography policy naming approved algorithms, key lengths and lifetimes.",
+        "Define key generation, storage, rotation, and destruction procedures."
+      ]
+    },
+    {
+      "id": "A.8.25",
+      "title": "Secure development life cycle",
+      "theme": "Technological",
+      "objective": "Rules for the secure development of software and systems are established and applied.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "secure_sdlc",
+      "checks": [],
+      "remediation": [
+        "Document an SDLC with security gates at design, build, test and release.",
+        "Require threat modelling for new or materially changed services.",
+        "Train developers annually on secure coding for your technology stack."
+      ]
+    },
+    {
+      "id": "A.8.26",
+      "title": "Application security requirements",
+      "theme": "Technological",
+      "objective": "Security requirements are identified, specified and approved when developing or acquiring applications.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "app_security_requirements",
+      "checks": [],
+      "remediation": [
+        "Define a baseline set of application security requirements (authn, authz, logging, crypto, input validation).",
+        "Include them in requirements documents and vendor RFPs.",
+        "Verify each requirement before release sign-off."
+      ]
+    },
+    {
+      "id": "A.8.27",
+      "title": "Secure system architecture and engineering principles",
+      "theme": "Technological",
+      "objective": "Principles for engineering secure systems are established, documented and applied.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "secure_architecture_principles",
+      "checks": [],
+      "remediation": [
+        "Adopt and publish principles: least privilege, defence in depth, secure defaults, fail secure, zero trust.",
+        "Require an architecture review against these principles for significant changes.",
+        "Record deviations as accepted risks with an owner and expiry."
+      ]
+    },
+    {
+      "id": "A.8.28",
+      "title": "Secure coding",
+      "theme": "Technological",
+      "objective": "Secure coding principles are applied to software development.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "secure_coding_standards",
+      "checks": [],
+      "remediation": [
+        "Publish a secure coding standard mapped to OWASP Top 10 / ASVS.",
+        "Run SAST and software composition analysis in CI and fail builds on high findings.",
+        "Require peer review of security-relevant code and scan for hard-coded secrets."
+      ]
+    },
+    {
+      "id": "A.8.29",
+      "title": "Security testing in development and acceptance",
+      "theme": "Technological",
+      "objective": "Security testing processes are defined and implemented in the development lifecycle.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "security_testing_performed",
+      "checks": [],
+      "remediation": [
+        "Define required test types per release risk (SAST, DAST, dependency scan, pen test).",
+        "Set acceptance thresholds that block release when unmet.",
+        "Retain test evidence for audit and retest fixes before closure."
+      ]
+    },
+    {
+      "id": "A.8.30",
+      "title": "Outsourced development",
+      "theme": "Technological",
+      "objective": "Outsourced development activity is directed, monitored and reviewed.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "outsourced_dev_controlled",
+      "checks": [],
+      "remediation": [
+        "Impose your secure coding and testing standards contractually on the supplier.",
+        "Require evidence of security testing and the right to independently test.",
+        "Escrow source code and verify IP ownership terms."
+      ]
+    },
+    {
+      "id": "A.8.31",
+      "title": "Separation of development, test and production environments",
+      "theme": "Technological",
+      "objective": "Development, test and production environments are separated and secured.",
+      "mode": "manual",
+      "severity": "Medium",
+      "attestation": "environments_separated",
+      "checks": [],
+      "remediation": [
+        "Run development, test and production on separate infrastructure and credentials.",
+        "Prevent developers from holding standing production access.",
+        "Control and log any promotion of code or data between environments."
+      ]
+    },
+    {
+      "id": "A.8.32",
+      "title": "Change management",
+      "theme": "Technological",
+      "objective": "Changes to information processing facilities and systems are subject to change management.",
+      "mode": "hybrid",
+      "severity": "High",
+      "attestation": "change_management_process",
+      "checks": [
+        {
+          "field": "patching.pending_reboot",
+          "op": "falsy",
+          "label": "No pending reboot leaving changes half-applied"
+        }
+      ],
+      "remediation": [
+        "Operate a change management process with risk assessment, approval, testing and rollback plans.",
+        "Complete pending reboots in a controlled window so changes take effect.",
+        "Record emergency changes retrospectively within an agreed timeframe.",
+        "Review change records for unauthorised changes periodically."
+      ]
+    },
+    {
+      "id": "A.8.33",
+      "title": "Test information",
+      "theme": "Technological",
+      "objective": "Test information is appropriately selected, protected and managed.",
+      "mode": "manual",
+      "severity": "Low",
+      "attestation": "test_data_protected",
+      "checks": [],
+      "remediation": [
+        "Prohibit copying live personal or confidential data into test environments.",
+        "Where live data is unavoidable, mask it and apply production-grade controls.",
+        "Log and approve every copy of production data and delete it when testing ends."
+      ]
+    },
+    {
+      "id": "A.8.34",
+      "title": "Protection of information systems during audit testing",
+      "theme": "Technological",
+      "objective": "Audit tests on operational systems are planned and agreed to minimise disruption.",
+      "mode": "hybrid",
+      "severity": "Low",
+      "attestation": "audit_testing_controlled",
+      "checks": [
+        {
+          "field": "logging.audit_object_access",
+          "op": "contains",
+          "label": "Read-only audit activity is itself auditable",
+          "value": "Success"
+        }
+      ],
+      "remediation": [
+        "Agree audit scope, timing and read-only access with system owners in advance.",
+        "Use read-only accounts for audit data collection and log all audit access.",
+        "Schedule intrusive testing outside business-critical windows."
+      ]
+    }
+  ]
+}
