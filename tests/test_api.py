@@ -80,6 +80,34 @@ def request(path, payload=None, method=None, raw=False):
 
 
 # ---------------------------------------------------------------------------
+print("\n=== 0a. vercel.json is deployable ===")
+# A malformed functions block does not fail the build — Vercel simply creates no
+# functions, and every /api/* route 404s while the static site serves happily.
+# These assertions encode the constraints that caused exactly that.
+with open(os.path.join(ROOT, "vercel.json"), encoding="utf-8") as fh:
+    vjson = json.load(fh)
+
+fns = vjson.get("functions", {})
+check("No 'memory' key in functions",
+      not any("memory" in cfg for cfg in fns.values()),
+      "memory cannot be set in vercel.json when Fluid compute is enabled, "
+      "which is the default — it invalidates the whole functions block")
+check("No legacy 'builds' key", "builds" not in vjson,
+      "'builds' disables zero-config and cannot be combined with 'functions'")
+check("No bare 'runtime' version in functions",
+      all("runtime" not in cfg or "@" in str(cfg["runtime"])
+          for cfg in fns.values()),
+      "runtime must be an npm package with a version, e.g. @vercel/python@4.3.0")
+check("api/ exists at the project root with handler files",
+      os.path.isdir(os.path.join(ROOT, "api")) and
+      all(os.path.isfile(os.path.join(ROOT, "api", f"{n}.py"))
+          for n in ("audit", "report", "baseline", "health")))
+check(".vercelignore does not exclude anything the functions need",
+      not any(line.strip().rstrip("/") in ("api", "core", "data", "samples", "public")
+              for line in open(os.path.join(ROOT, ".vercelignore"), encoding="utf-8")
+              if line.strip() and not line.startswith("#")))
+
+
 print("\n=== 0. Handlers import without api/ on sys.path ===")
 # Vercel does not guarantee the api/ directory is importable, so a bare
 # `from _common import ...` fails at module import — before any handler exists

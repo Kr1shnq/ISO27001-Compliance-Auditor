@@ -63,6 +63,11 @@ Notes on how it fits the platform:
 - `.vercelignore` excludes `app/`, keeping Vercel's Python entrypoint detection away from
   the Streamlit application entirely.
 - Python version is pinned in `.python-version`.
+- **No `functions` block in `vercel.json`.** None is needed — an `api/` directory at the
+  project root is the only requirement. It was removed because `memory` cannot be set
+  there once Fluid compute is enabled (the default since April 2025); an invalid block
+  does not fail the build, it silently creates no functions at all, and every `/api/*`
+  route 404s while the static site keeps serving normally.
 
 ### Troubleshooting a deployment
 
