@@ -9,7 +9,9 @@ Run:  python tests/test_engine.py
 
 import json
 import os
+import shutil
 import sys
+import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "app"))
@@ -296,8 +298,10 @@ check("Theme breakdown totals 93", themes_sum == 93, str(themes_sum))
 
 
 print("\n=== 9. PDF export ===")
-out_dir = os.path.join(ROOT, "docs")
-os.makedirs(out_dir, exist_ok=True)
+# Write to a temp directory, not docs/. PDFs embed a creation timestamp, so
+# regenerating the committed sample reports on every test run would leave the
+# working tree permanently dirty. Use tools/refresh_samples.py to update them.
+out_dir = tempfile.mkdtemp(prefix="iso27001_test_pdf_")
 for label, rep in (("hardened", hardrep), ("legacy", legrep)):
     pdf = build_pdf(rep, org="Acme Corporation", auditor="Information Security Team",
                     scope_note="Automated point-in-time technical assessment of a single host.")
@@ -313,6 +317,8 @@ check("Report is JSON-serialisable", len(blob) > 10000, f"{len(blob)/1024:.0f} K
 rt = json.loads(blob)
 check("Round-trip keeps 93 controls", len(rt["controls"]) == 93)
 
+
+shutil.rmtree(out_dir, ignore_errors=True)
 
 print("\n" + "=" * 62)
 if FAILED:

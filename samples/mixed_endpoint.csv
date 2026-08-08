@@ -9,7 +9,7 @@ metadata.domain,corp.acme.local
 metadata.domain_joined,true
 metadata.manufacturer,Dell Inc.
 metadata.model,Latitude 7430
-metadata.serial_number,SN-8667561
+metadata.serial_number,SN-7472863
 metadata.collected_utc,2026-08-08T09:14:22Z
 metadata.collector_version,1.0.0
 metadata.collected_elevated,true

@@ -12,8 +12,19 @@ access to a live Windows host. Produces three profiles:
 import csv
 import json
 import os
+import zlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def fake_serial(host: str) -> str:
+    """Stable pseudo-serial for a host name.
+
+    Uses crc32 rather than the builtin hash(): string hashing is salted per
+    interpreter process, which made the generated samples differ on every run
+    and left the working tree dirty after regeneration.
+    """
+    return f"SN-{zlib.crc32(host.encode()) % 10 ** 7:07d}"
 
 
 def base(host, os_caption, server=False):
@@ -29,7 +40,7 @@ def base(host, os_caption, server=False):
             "domain_joined": True,
             "manufacturer": "Dell Inc.",
             "model": "PowerEdge R650" if server else "Latitude 7430",
-            "serial_number": f"SN-{abs(hash(host)) % 10**7:07d}",
+            "serial_number": fake_serial(host),
             "collected_utc": "2026-08-08T09:14:22Z",
             "collector_version": "1.0.0",
             "collected_elevated": True,
