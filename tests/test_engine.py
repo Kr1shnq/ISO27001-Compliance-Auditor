@@ -14,11 +14,11 @@ import sys
 import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, ROOT)
+sys.path.insert(0, os.path.join(ROOT, "app"))
 
-from core.ingestion import parse_bytes, validate, coerce, flatten, unflatten  # noqa: E402
-from core.audit_engine import AuditEngine, evaluate_op                        # noqa: E402
-from core.pdf_report import build_pdf                                         # noqa: E402
+from ingestion import parse_bytes, validate, coerce, flatten, unflatten   # noqa: E402
+from audit_engine import AuditEngine, evaluate_op                         # noqa: E402
+from pdf_report import build_pdf                                          # noqa: E402
 
 SAMPLES = os.path.join(ROOT, "samples")
 FAILED = []

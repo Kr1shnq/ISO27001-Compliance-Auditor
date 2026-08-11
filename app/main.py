@@ -5,7 +5,7 @@ Streamlit web application that automates gap analysis of system configuration
 telemetry against all 93 ISO/IEC 27001:2022 Annex A controls.
 
 Run:
-    streamlit run app/dashboard.py
+    streamlit run app/main.py
 """
 
 from __future__ import annotations
@@ -20,14 +20,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-# The engine lives in core/ so the Streamlit app and the Vercel serverless
-# functions share one implementation. Add the repo root to the path so the
-# package resolves however streamlit is invoked.
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from core.ingestion import parse_bytes, validate, unflatten     # noqa: E402
-from core.audit_engine import AuditEngine, DEFAULT_BASELINE     # noqa: E402
-from core.pdf_report import build_pdf                           # noqa: E402
+from ingestion import parse_bytes, validate, unflatten          # noqa: E402
+from audit_engine import AuditEngine, DEFAULT_BASELINE          # noqa: E402
+from pdf_report import build_pdf                                # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAMPLE_DIR = os.path.join(ROOT, "samples")

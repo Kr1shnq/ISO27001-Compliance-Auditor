@@ -7,7 +7,7 @@ if [ ! -d .venv ]; then
   echo "Creating virtual environment..."
   python3 -m venv .venv
   ./.venv/bin/pip install -q --upgrade pip
-  ./.venv/bin/pip install -q -r requirements-streamlit.txt
+  ./.venv/bin/pip install -q -r requirements.txt
 fi
 
 # Rebuild the baseline if the generator is newer than the JSON it produces.
@@ -16,4 +16,4 @@ if [ data/build_baseline.py -nt data/iso27001_baseline.json ]; then
 fi
 
 echo "Starting on http://localhost:8501 — press Ctrl+C to stop."
-exec ./.venv/bin/streamlit run app/dashboard.py
+exec ./.venv/bin/streamlit run app/main.py

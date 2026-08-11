@@ -22,7 +22,7 @@ from reportlab.platypus import (BaseDocTemplate, Frame, KeepTogether, ListFlowab
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-sys.path.insert(0, ROOT)
+sys.path.insert(0, os.path.join(ROOT, "app"))
 
 OUT = os.path.join(HERE, "ISO27001_Compliance_Auditor_Guide.pdf")
 
@@ -40,8 +40,8 @@ CODEBG = colors.HexColor("#0f172a")
 # ---------------------------------------------------------------------------
 # Live figures pulled from the actual baseline and a real audit run
 # ---------------------------------------------------------------------------
-from core.ingestion import parse_bytes               # noqa: E402
-from core.audit_engine import AuditEngine            # noqa: E402
+from ingestion import parse_bytes                    # noqa: E402
+from audit_engine import AuditEngine                 # noqa: E402
 
 engine = AuditEngine()
 MODES = {"automated": 0, "hybrid": 0, "manual": 0}
@@ -534,7 +534,7 @@ F += [
     code([
         'cd ISO27001',
         'pip install -r requirements.txt',
-        'streamlit run app/dashboard.py',
+        'streamlit run app/main.py',
     ]),
     P("On macOS and Linux, <font face='Courier' size=8.5>./run.sh</font> does the same "
       "thing but creates an isolated virtual environment first and rebuilds the baseline "
