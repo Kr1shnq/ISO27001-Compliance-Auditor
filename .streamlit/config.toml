@@ -1,0 +1,33 @@
+# Streamlit configuration.
+#
+# Everything here is host-independent. The port is deliberately NOT set: Railway
+# assigns one per deployment via $PORT, and a TOML file cannot read an
+# environment variable, so it is passed on the command line in the Procfile.
+
+[server]
+# Railway routes to the container's external interface, so binding the default
+# localhost would make the app unreachable even though it started fine.
+address = "0.0.0.0"
+
+# Skip the interactive "enter your email" prompt on first run, which would
+# otherwise block startup in a container.
+headless = true
+
+# Telemetry reports are small — a collector run is normally well under 200 KB.
+# A low ceiling limits the damage a malicious or mistaken upload can do.
+maxUploadSize = 10
+
+# XSRF protection is left ON. It is occasionally blamed for file-upload
+# failures behind a reverse proxy; if uploads break on Railway, test with
+# `--server.enableXsrfProtection false` before disabling it permanently, since
+# turning it off weakens a security control in a security tool.
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#2563af"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f1f5f9"
+textColor = "#475569"

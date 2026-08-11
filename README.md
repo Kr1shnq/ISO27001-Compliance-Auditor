@@ -19,6 +19,36 @@ Then load one of the bundled samples from the sidebar to explore, or collect rea
 
 Upload the resulting `ISOTelemetry_<HOST>_<timestamp>.json` in the web app.
 
+## Deploying to Railway
+
+Railway runs persistent containers, which is what Streamlit needs — it holds session
+state in memory and keeps a WebSocket open for the life of the session.
+
+1. Create a project at [railway.app](https://railway.app) and point it at this repository.
+2. Deploy. Nixpacks detects Python from `requirements.txt`; `railway.json` supplies the
+   start command and health check. No environment variables are required.
+3. Under **Settings → Networking**, generate a domain.
+
+The configuration that matters:
+
+| File | Why |
+|---|---|
+| `railway.json` | Start command, `/_stcore/health` health check, restart policy |
+| `Procfile` | Same start command, for any Procfile-based host |
+| `.streamlit/config.toml` | Binds `0.0.0.0`, headless startup, 10 MB upload cap, theme |
+| `.python-version` | Pins Python 3.12 for the Nixpacks build |
+
+Two settings are load-bearing rather than cosmetic. Streamlit binds `localhost:8501` by
+default, which Railway cannot route to, so `address = "0.0.0.0"` is set in
+`config.toml` and the port comes from `$PORT` on the command line — a TOML file cannot
+read an environment variable. And `headless = true` skips the interactive "enter your
+email" prompt, which would otherwise block startup in a container.
+
+**If file uploads fail** with an XSRF error, that is the known interaction between
+Streamlit's CSRF token and a reverse proxy. Confirm by temporarily appending
+`--server.enableXsrfProtection false` to the start command — but treat that as a
+diagnosis, not a fix, since it disables a real security control in a security tool.
+
 ## Layout
 
 | Path | Purpose |
@@ -32,7 +62,9 @@ Upload the resulting `ISOTelemetry_<HOST>_<timestamp>.json` in the web app.
 | `collector/Collect-ISOTelemetry.ps1` | Read-only Windows telemetry collector |
 | `samples/` | Three demo profiles (hardened, legacy, mixed) |
 | `tests/test_engine.py` | End-to-end verification suite |
+| `tools/refresh_samples.py` | Regenerates every committed artefact |
 | `docs/` | User guide PDF and sample audit reports |
+| `railway.json`, `Procfile`, `.streamlit/config.toml` | Deployment configuration |
 
 ## How scoring works
 
