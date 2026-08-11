@@ -179,6 +179,33 @@ if st.session_state.flat is None:
                 type="primary",
                 help="Read-only inventory of the local Windows host. Changes no "
                      "setting, installs nothing and makes no outbound connection.")
+            # Windows tags anything downloaded from a browser with the Mark of the
+            # Web, and PowerShell refuses to run such a script under the default
+            # execution policy. Without this note the download is a dead end.
+            with st.expander("Windows will block the downloaded script — how to run it"):
+                st.markdown(
+                    "Windows marks files downloaded from a browser as coming from the "
+                    "internet, and PowerShell will not run them under the default "
+                    "execution policy. Your browser may also warn before saving a "
+                    "`.ps1`, and endpoint protection may flag it — the script reads "
+                    "security settings, which resembles reconnaissance.\n\n"
+                    "In an **Administrator** PowerShell session, in the folder you "
+                    "saved it to:")
+                st.code(
+                    "Unblock-File .\\Collect-ISOTelemetry.ps1\n"
+                    ".\\Collect-ISOTelemetry.ps1 -IncludeAttestations",
+                    language="powershell")
+                st.markdown(
+                    "`Unblock-File` clears the internet mark. If the execution policy "
+                    "still refuses, allow scripts for that one session only — this "
+                    "does not change the machine's policy:")
+                st.code(
+                    "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force",
+                    language="powershell")
+                st.caption(
+                    "Read the script before running it — that is good practice for "
+                    "anything downloaded. It is read-only: it changes no setting, "
+                    "installs nothing and makes no outbound connection.")
         else:
             st.warning("The collector script is not bundled with this deployment — "
                        "fetch it from `collector/Collect-ISOTelemetry.ps1` in the "

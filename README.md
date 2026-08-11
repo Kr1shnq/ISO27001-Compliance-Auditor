@@ -22,6 +22,16 @@ Then load one of the bundled samples from the sidebar to explore, or collect rea
 .\collector\Collect-ISOTelemetry.ps1 -OutputPath C:\Audit -IncludeAttestations
 ```
 
+If you downloaded the script rather than cloning the repository, Windows will have
+tagged it with the Mark of the Web and PowerShell will refuse to run it. Clear the mark
+first — or allow scripts for that one session, which does not change machine policy:
+
+```powershell
+Unblock-File .\Collect-ISOTelemetry.ps1
+# ...or, for the current session only:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+```
+
 Upload the resulting `ISOTelemetry_<HOST>_<timestamp>.json` in the web app.
 
 ## Deploying to Railway
