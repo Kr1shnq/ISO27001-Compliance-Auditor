@@ -98,6 +98,19 @@ check("Python version pinned for the build",
       os.path.isfile(os.path.join(ROOT, ".python-version")))
 check("Baseline data is committed, not generated at boot",
       os.path.isfile(os.path.join(ROOT, "data", "iso27001_baseline.json")))
+
+# The landing page serves this file through a download button, so it has to be
+# present in the deployed image, not just in the repository.
+collector = os.path.join(ROOT, "collector", "Collect-ISOTelemetry.ps1")
+check("Collector script is deployable (offered as a download in-app)",
+      os.path.isfile(collector) and os.path.getsize(collector) > 10000,
+      f"{os.path.getsize(collector) if os.path.isfile(collector) else 0} bytes")
+if os.path.isfile(collector):
+    with open(collector, "rb") as fh:
+        script = fh.read()
+    check("Collector retains its comment-based help (Get-Help depends on it)",
+          script.lstrip().startswith(b"<#") and b".SYNOPSIS" in script
+          and b".EXAMPLE" in script)
 check("No Vercel artefacts remain",
       not any(os.path.exists(os.path.join(ROOT, p))
               for p in ("vercel.json", ".vercelignore", "api", "public", "core")))

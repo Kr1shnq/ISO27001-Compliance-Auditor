@@ -28,6 +28,7 @@ from pdf_report import build_pdf                                # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAMPLE_DIR = os.path.join(ROOT, "samples")
+COLLECTOR = os.path.join(ROOT, "collector", "Collect-ISOTelemetry.ps1")
 
 PALETTE = {
     "PASS": "#16a34a", "PARTIAL": "#ca8a04", "FAIL": "#dc2626",
@@ -70,6 +71,20 @@ def get_engine(path: str):
 def load_sample(name: str) -> bytes:
     with open(os.path.join(SAMPLE_DIR, name), "rb") as fh:
         return fh.read()
+
+
+@st.cache_data(show_spinner=False)
+def load_collector() -> bytes | None:
+    """Read the PowerShell collector so it can be offered as a download.
+
+    Returns None rather than raising if the script is absent, so a partial
+    deployment degrades to an instruction instead of a broken landing page.
+    """
+    try:
+        with open(COLLECTOR, "rb") as fh:
+            return fh.read()
+    except OSError:
+        return None
 
 
 def ss(key, default):
@@ -149,8 +164,29 @@ if st.session_state.flat is None:
     with left:
         st.subheader("Get started")
         st.markdown("""
-1. **Collect telemetry** — run `collector/Collect-ISOTelemetry.ps1` as Administrator
-   on the target Windows host. It writes a JSON and a CSV configuration report.
+1. **Collect telemetry** — click below to download the telemetry-fetching PowerShell
+   script, then run it as Administrator on the target Windows host to generate a
+   configuration report.
+        """)
+
+        collector = load_collector()
+        if collector is not None:
+            st.download_button(
+                "Download Collect-ISOTelemetry.ps1",
+                data=collector,
+                file_name="Collect-ISOTelemetry.ps1",
+                mime="application/octet-stream",
+                type="primary",
+                help="Read-only inventory of the local Windows host. Changes no "
+                     "setting, installs nothing and makes no outbound connection.")
+        else:
+            st.warning("The collector script is not bundled with this deployment — "
+                       "fetch it from `collector/Collect-ISOTelemetry.ps1` in the "
+                       "repository.")
+
+        # Numbering continues from 1 above: CommonMark takes an ordered list's start
+        # value from its first item, so this block renders as 2-5 rather than 1-4.
+        st.markdown("""
 2. **Upload** the report in the sidebar (or load a bundled sample to explore).
 3. **Review** the dashboard, control register and remediation roadmap.
 4. **Attest** the organisational controls that cannot be measured technically.
