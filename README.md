@@ -24,19 +24,21 @@ Upload the resulting `ISOTelemetry_<HOST>_<timestamp>.json` in the web app.
 Railway runs persistent containers, which is what Streamlit needs — it holds session
 state in memory and keeps a WebSocket open for the life of the session.
 
-1. Create a project at [railway.app](https://railway.app) and point it at this repository.
-2. Deploy. Nixpacks detects Python from `requirements.txt`; `railway.json` supplies the
-   start command and health check. No environment variables are required.
-3. Under **Settings → Networking**, generate a domain.
+1. At [railway.com](https://railway.com), open the dashboard and choose
+   **New Project → Deploy from GitHub repo**, then pick this repository.
+2. Choose **Deploy Now**. Railpack detects Python from `requirements.txt` and installs it;
+   `railway.json` supplies the start command and health check. No environment variables
+   are required.
+3. Once the build succeeds, open the service → **Settings → Networking → Generate Domain**.
 
 The configuration that matters:
 
 | File | Why |
 |---|---|
-| `railway.json` | Start command, `/_stcore/health` health check, restart policy |
+| `railway.json` | Start command, `/_stcore/health` health check, restart policy. No `builder` key — Railpack is the default; `NIXPACKS` is no longer a valid value. |
 | `Procfile` | Same start command, for any Procfile-based host |
 | `.streamlit/config.toml` | Binds `0.0.0.0`, headless startup, 10 MB upload cap, theme |
-| `.python-version` | Pins Python 3.12 for the Nixpacks build |
+| `.python-version` | Pins Python 3.12 for the build |
 
 Two settings are load-bearing rather than cosmetic. Streamlit binds `localhost:8501` by
 default, which Railway cannot route to, so `address = "0.0.0.0"` is set in
@@ -48,6 +50,12 @@ email" prompt, which would otherwise block startup in a container.
 Streamlit's CSRF token and a reverse proxy. Confirm by temporarily appending
 `--server.enableXsrfProtection false` to the start command — but treat that as a
 diagnosis, not a fix, since it disables a real security control in a security tool.
+
+Verify the config before deploying:
+
+```bash
+python tests/test_deploy_config.py
+```
 
 ## Layout
 
@@ -62,6 +70,7 @@ diagnosis, not a fix, since it disables a real security control in a security to
 | `collector/Collect-ISOTelemetry.ps1` | Read-only Windows telemetry collector |
 | `samples/` | Three demo profiles (hardened, legacy, mixed) |
 | `tests/test_engine.py` | End-to-end verification suite |
+| `tests/test_deploy_config.py` | Validates the Railway config against the documented schema |
 | `tools/refresh_samples.py` | Regenerates every committed artefact |
 | `docs/` | User guide PDF and sample audit reports |
 | `railway.json`, `Procfile`, `.streamlit/config.toml` | Deployment configuration |
@@ -90,7 +99,8 @@ real verdict — so a thin telemetry file cannot masquerade as a clean audit.
 ## Tests
 
 ```bash
-python tests/test_engine.py
+python tests/test_engine.py          # engine, ingestion, scoring, roadmap, PDF
+python tests/test_deploy_config.py   # Railway config against the documented schema
 ```
 
 Covers baseline integrity, all comparison operators, ingestion and type coercion,
