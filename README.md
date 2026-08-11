@@ -3,6 +3,11 @@
 Automated gap analysis of Windows system configuration against all **93 ISO/IEC 27001:2022
 Annex A controls**, with real-time compliance visibility and an actionable remediation roadmap.
 
+**Live demo:** https://web-production-f71a4.up.railway.app
+
+No Windows machine needed — load one of the three bundled demonstration profiles from the
+sidebar to see a full assessment.
+
 ## Quick start
 
 ```bash
